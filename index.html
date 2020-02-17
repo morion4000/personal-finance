@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Personal Finance Tracker</title>
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <h1 class="display-4">Personal Finance Tracker</h1>
+          <p class="lead">Visualise Financial Streams.</p>
+          <button type="button" class="btn btn-primary btn-lg">
+            Streaming <span class="badge badge-light" id="streaming_revenue">$0</span>
+          </button>
+          <br /><br />
+          <p>
+            Income:
+            <span id="streaming_hour" class="badge badge-light" data-toggle="tooltip" data-html="true" title="Hourly">$0</span> /
+            <span id="streaming_day" class="badge badge-light" data-toggle="tooltip" data-html="true" title="Daily">$0</span> /
+            <span id="streaming_month" class="badge badge-light" data-toggle="tooltip" data-html="true" title="Monthly">$0</span> /
+            <span id="streaming_year" class="badge badge-light" data-toggle="tooltip" data-html="true" title="Yearly">$0</span>
+          </p>
+          <p>
+            Expenses:
+            <span id="expense_hour" class="badge badge-danger" data-toggle="tooltip" data-html="true" title="Hourly">$0</span> /
+            <span id="expense_day" class="badge badge-danger" data-toggle="tooltip" data-html="true" title="Daily">$0</span> /
+            <span id="expense_month" class="badge badge-danger" data-toggle="tooltip" data-html="true" title="Monthly">$0</span> /
+            <span id="expense_year" class="badge badge-danger" data-toggle="tooltip" data-html="true" title="Yearly">$0</span>
+          </p>
+        </div>
+        <div class="col-sm">
+          <div id="donut_overall_status" style="height:400px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="alert alert-primary" role="alert">
+      <p>
+        Runway: <span id="runway" data-toggle="tooltip" data-html="true" title="Runway">0 Years</span>
+      </p>
+      <p>
+        Est. Worth: <span id="net_worth" data-toggle="tooltip" data-html="true" title="@ 7% APR"></span>
+      </p>
+    </div>
+
+    <br />
+
+    <div class="row">
+      <div class="col-sm">
+        <div id="assets">
+          <div class="row">
+            <div class="col-sm">
+              <h3>Savings <span class="badge badge-secondary" id="assets_apr_total">0%</span></h3>
+              <h5 id="assets_principal_total"></h5>
+              <span id="assets_accrued_total" data-toggle="tooltip" data-html="true" title="Computing...">$0</span>
+              <hr />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div id="services">
+          <div class="row">
+            <div class="col-sm">
+              <h3>Services / Products</h3>
+              <h5><span id="services_estimated_principal_total" data-toggle="tooltip" data-html="true" title="Est. at 7% APR">$0</span></h5>
+              <span id="services_accrued_total" data-toggle="tooltip" data-html="true" title="Computing...">$0</span>
+              <hr />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm">
+        <br /><br />
+        <div id="sankey"></div>
+      </div>
+    </div>
+
+    <div class="row" style="display:none">
+      <div class="col-sm">
+        <br /><br />
+        <div id="pie_income"></div>
+      </div>
+      <div class="col-sm">
+        <br /><br />
+        <div id="pie_expenses"></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="mt-5 mb-3 text-muted text-center">&copy; 2020 <a href="https://www.morion4000.com" target="_blank">morion4000</a>. All rights reserved.</p>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <script src="highcharts/code/highcharts.js"></script>
+  <script src="highcharts/code/modules/sankey.js"></script>
+  <script src="highcharts/code/modules/exporting.js"></script>
+
+  <script type="text/javascript" src="scripts.js"></script>
+</body>
+
+</html>
