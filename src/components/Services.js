@@ -52,8 +52,8 @@ class Assets extends Component {
     render() {
         return (
             <React.Fragment>
-                <div class="row">
-                  <div class="col-sm">
+                <div className="row">
+                  <div className="col-sm">
                     <h3>Services</h3>
                     <h5><span id="services_estimated_principal_total" data-toggle="tooltip" data-html="true" title="Est. at ${CONFIG.SERVICE_ESTIMATE_APR}% APR">${this.getTotalEstimatedPrincipal()}</span></h5>
                     <span id="services_accrued_total" data-toggle="tooltip" data-html="true" title="Computing...">${this.state.accrued_sum}</span>
@@ -62,17 +62,17 @@ class Assets extends Component {
                 </div>
 
                 {this.props.items.map(item => (
-                    <div class="row">
-                        <div class="col-sm">
-                            <div class="form-label-group">
+                    <div className="row">
+                        <div className="col-sm">
+                            <div className="form-label-group">
                                 <strong><label for="principal" data-toggle="tooltip" data-html="true" title="">{item.name}</label></strong>
-                                <input type="text" class="form-control" value={item.amount} disabled />
+                                <input type="text" className="form-control" value={item.amount} disabled />
                             </div>
                         </div>
-                        <div class="col-sm">
-                            <div class="form-label-group">
+                        <div className="col-sm">
+                            <div className="form-label-group">
                             <label for="gains" data-toggle="tooltip" data-html="true" title="">Revenue</label>
-                                <input type="text" class="form-control" value={item.accrued} disabled />
+                                <input type="text" className="form-control" value={item.accrued} disabled />
                             </div>
                         </div>
                     </div>

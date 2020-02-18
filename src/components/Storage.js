@@ -1,3 +1,5 @@
+import CONFIG from '../config';
+
 class Storage {
   static TYPES = {
     ASSET: 'asset',
@@ -52,7 +54,7 @@ class Storage {
   }];
 
   static getItems(type = null) {
-      let items = [];
+      let items = localStorage.getItem(CONFIG.LOCALSTORAGE_KEY) || [];
 
       if (type) {
         Storage.items.forEach(function(item) {
@@ -65,6 +67,14 @@ class Storage {
       }
     
       return items;
+  }
+
+  static addItem(item) {
+    let items = localStorage.getItem(CONFIG.LOCALSTORAGE_KEY);
+
+    items.push(item);
+
+    localStorage.setItem(CONFIG.LOCALSTORAGE_KEY, items);
   }
 }
 

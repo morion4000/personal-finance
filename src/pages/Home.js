@@ -31,25 +31,25 @@ class Home extends Component {
           <Donut items={this.state.all_items} />
         </Header>
 
-        <div class="container">
+        <div className="container">
           <Alert items={this.state.all_items} />
           
           <br />
 
-          <div class="row">
-            <div class="col-sm">
+          <div className="row">
+            <div className="col-sm">
               <Assets items={this.state.assets} />
             </div>
 
-            <div class="col-sm">
+            <div className="col-sm">
               <Services items={this.state.services} />
             </div>
           </div>
 
           <br />
 
-          <div class="row">
-            <div class="col-sm">
+          <div className="row">
+            <div className="col-sm">
               <Sankey items={this.state.all_items} />
             </div>
           </div>

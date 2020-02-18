@@ -44,9 +44,9 @@ class Alert extends Component {
 
     render() {
         return (    
-          <div class="alert alert-primary" role="alert">
+          <div className="alert alert-primary" role="alert">
             <p>Runway: <span data-toggle="tooltip" data-html="true" title="Runway">{this.state.runway} Years</span></p>
-            <p>Est. Worth: <span  data-toggle="tooltip" data-html="true" title="@ 7% APR">${this.state.estimated_worth}</span></p>
+            <p>Est. Worth: <span data-toggle="tooltip" data-html="true" title="@ 7% APR">${this.state.estimated_worth}</span></p>
           </div>
         );
     }

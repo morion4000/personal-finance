@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import CONFIG from '../config';
+import Storage from './Storage';
 
 class Assets extends Component {
     constructor(props) {
@@ -9,6 +10,30 @@ class Assets extends Component {
         this.state = {
             total_accrued: 0
         }
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+    
+        this.setState({
+          [name]: value
+        });
+      }
+    
+    handleSubmit(e) {
+        e.preventDefault();
+
+        Storage.addItem({
+            type: Storage.TYPES.ASSET,
+            name: this.state.name,
+            apr: this.state.apr,
+            compounds: false
+        });
     }
 
     componentDidMount() {
@@ -59,9 +84,9 @@ class Assets extends Component {
     render() {
         return (
             <React.Fragment>
-                <div class="row">
-                  <div class="col-sm">
-                    <h3>Savings <span class="badge badge-secondary">{this.getAssetsTotalApr()}%</span></h3>
+                <div className="row">
+                  <div className="col-sm">
+                    <h3>Savings <span className="badge badge-secondary">{this.getAssetsTotalApr()}%</span></h3>
                     <h5>${this.getAssetsTotalPrincipal()}</h5>
                     <span data-toggle="tooltip" data-html="true" title="Computing...">${this.state.total_accrued}</span>
                     <hr />
@@ -69,21 +94,66 @@ class Assets extends Component {
                 </div>
 
                 {this.props.items.map(item => (
-                    <div class="row">
-                        <div class="col-sm">
-                            <div class="form-label-group">
+                    <div className="row">
+                        <div className="col-sm">
+                            <div className="form-label-group">
                                 <strong><label for="principal" data-toggle="tooltip" data-html="true" title="">{item.name}</label></strong>
-                                <input type="text" class="form-control" value={item.amount} disabled />
+                                <input type="text" className="form-control" value={item.amount} disabled />
                             </div>
                         </div>
-                        <div class="col-sm">
-                            <div class="form-label-group">
+                        <div className="col-sm">
+                            <div className="form-label-group">
                             <label for="gains" data-toggle="tooltip" data-html="true" title="">APR {item.apr}%</label>
-                                <input type="text" class="form-control" value={item.accrued} disabled />
+                                <input type="text" className="form-control" value={item.accrued} disabled />
                             </div>
                         </div>
                     </div>
                 ))}
+
+                <hr />
+
+                <div className="row">
+                  <div className="col-sm">
+                    <h5>New asset</h5>
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="form-row form-group">
+                            <div className="col">
+                                <input 
+                                    className="form-control form-control-lg"
+                                    type="text"
+                                    placeholder="Name"
+                                    name="name"
+                                    value={this.state.name}
+                                    onChange={this.handleInputChange} />
+                                <small>i.e. Bank deposit</small>
+                            </div>
+                            <div className="col">
+                                <input
+                                    className="form-control form-control-lg"
+                                    type="text"
+                                    placeholder="APR"
+                                    name="apr"
+                                    value={this.state.apr}
+                                    onChange={this.handleInputChange} />
+                                <small>i.e. 4</small>
+                            </div>
+                        </div>
+                        <div className="form-row form-group">
+                            <div className="col">
+                                <button
+                                    className="btn btn-block btn-success btn-lg"
+                                    type="submit">Add asset</button>
+                            </div>
+                        </div>
+                        {/*
+                        <div className="text-center">
+                            <span className="text-small text-muted">By clicking 'Create Token' you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>
+                            </span>
+                        </div>
+                        */}
+                    </form>
+                  </div>
+                </div>
             </React.Fragment>
         );
     }

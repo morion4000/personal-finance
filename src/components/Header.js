@@ -57,32 +57,32 @@ class Header extends Component {
 
     render() {
         return (
-            <div class="jumbotron jumbotron-fluid">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm">
-                        <h1 class="display-4">Money.Stream</h1>
-                        <p class="lead">Visualise Financial Streams.</p>
-                        <button type="button" class="btn btn-primary btn-lg">
-                            Streaming <span class="badge badge-light">${this.state.accrued_sum}</span>
+            <div className="jumbotron jumbotron-fluid">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm">
+                        <h1 className="display-4">Money.Stream</h1>
+                        <p className="lead">Visualise Financial Streams.</p>
+                        <button type="button" className="btn btn-primary btn-lg">
+                            Streaming <span className="badge badge-light">${this.state.accrued_sum}</span>
                         </button>
                         <br /><br />
                         <p>
                             Income:
-                            <span class="badge badge-light" data-toggle="tooltip" data-html="true" title="Hourly">${this.state.monthly_income / 30 / 24}</span> /
-                            <span class="badge badge-light" data-toggle="tooltip" data-html="true" title="Daily">${this.state.monthly_income / 30}</span> /
-                            <span class="badge badge-light" data-toggle="tooltip" data-html="true" title="Monthly">${this.state.monthly_income}</span> /
-                            <span class="badge badge-light" data-toggle="tooltip" data-html="true" title="Yearly">${this.state.monthly_income * 12}</span>
+                            <span className="badge badge-light" data-toggle="tooltip" data-html="true" title="Hourly">${this.state.monthly_income / 30 / 24}</span> /
+                            <span className="badge badge-light" data-toggle="tooltip" data-html="true" title="Daily">${this.state.monthly_income / 30}</span> /
+                            <span className="badge badge-light" data-toggle="tooltip" data-html="true" title="Monthly">${this.state.monthly_income}</span> /
+                            <span className="badge badge-light" data-toggle="tooltip" data-html="true" title="Yearly">${this.state.monthly_income * 12}</span>
                         </p>
                         <p>
                             Expenses:
-                            <span class="badge badge-danger" data-toggle="tooltip" data-html="true" title="Hourly">${this.state.monthly_expenses / 30 / 24}</span> /
-                            <span class="badge badge-danger" data-toggle="tooltip" data-html="true" title="Daily">${this.state.monthly_expenses / 30}</span> /
-                            <span class="badge badge-danger" data-toggle="tooltip" data-html="true" title="Monthly">${this.state.monthly_expenses}</span> /
-                            <span class="badge badge-danger" data-toggle="tooltip" data-html="true" title="Yearly">${this.state.monthly_expenses * 12}</span>
+                            <span className="badge badge-danger" data-toggle="tooltip" data-html="true" title="Hourly">${this.state.monthly_expenses / 30 / 24}</span> /
+                            <span className="badge badge-danger" data-toggle="tooltip" data-html="true" title="Daily">${this.state.monthly_expenses / 30}</span> /
+                            <span className="badge badge-danger" data-toggle="tooltip" data-html="true" title="Monthly">${this.state.monthly_expenses}</span> /
+                            <span className="badge badge-danger" data-toggle="tooltip" data-html="true" title="Yearly">${this.state.monthly_expenses * 12}</span>
                         </p>
                         </div>
-                        <div class="col-sm">
+                        <div className="col-sm">
                             {this.props.children}
                         </div>
                     </div>
