@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Assets from '../components/Assets';
 import Services from '../components/Services';
+import Expenses from '../components/Expenses';
 import Sankey from '../components/Sankey';
 import Donut from '../components/Donut';
 import Alert from '../components/Alert';
@@ -45,6 +46,10 @@ class Home extends Component {
 
             <div className="col-sm">
               <Services items={this.state.services} />
+            </div>
+
+            <div className="col-sm">
+              <Expenses items={this.state.expenses} />
             </div>
           </div>
 

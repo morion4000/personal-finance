@@ -42,6 +42,8 @@ class Assets extends Component {
             principal: '',
             apr: ''
         });
+
+        window.location.reload();
     }
 
     componentDidMount() {
@@ -153,20 +155,23 @@ class Assets extends Component {
                 <hr />
 
                 {this.props.items.map(item => (
-                    <div className="row">
-                        <div className="col-sm">
-                            <div className="form-label-group">
-                                <strong><label for="principal" data-toggle="tooltip" data-html="true" title="">{item.name}</label></strong>
-                                <input type="text" className="form-control" value={item.amount} disabled />
+                    <React.Fragment>
+                        <br />
+                        <div className="row">
+                            <div className="col-sm">
+                                <div className="form-label-group">
+                                    <strong><label for="principal" data-toggle="tooltip" data-html="true" title="">{item.name}</label></strong>
+                                    <input type="text" className="form-control" value={item.amount} disabled />
+                                </div>
+                            </div>
+                            <div className="col-sm">
+                                <div className="form-label-group">
+                                <label for="gains" data-toggle="tooltip" data-html="true" title="">APR {item.apr}%</label>
+                                    <input type="text" className="form-control" value={item.accrued} disabled />
+                                </div>
                             </div>
                         </div>
-                        <div className="col-sm">
-                            <div className="form-label-group">
-                            <label for="gains" data-toggle="tooltip" data-html="true" title="">APR {item.apr}%</label>
-                                <input type="text" className="form-control" value={item.accrued} disabled />
-                            </div>
-                        </div>
-                    </div>
+                    </React.Fragment>
                 ))}
 
                 {this.props.items.length === 0 && <center>No assets</center>}

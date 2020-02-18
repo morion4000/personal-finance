@@ -4,7 +4,7 @@ import NumberFormat from 'react-number-format';
 import CONFIG from '../config';
 import Storage from './Storage';
 
-class Assets extends Component {
+class Expenses extends Component {
     constructor(props) {
         super(props);
 
@@ -31,16 +31,16 @@ class Assets extends Component {
 
         Storage.addItem({
             id: Date.now(),
-            type: CONFIG.ITEM_TYPE.SERVICE,
+            type: CONFIG.ITEM_TYPE.EXPENSE,
             name: this.state.name,
-            amount: this.state.income,
+            amount: this.state.expense,
             apr: 0,
             compounds: false
         });
 
         this.setState({
             name: '',
-            income: ''
+            expense: ''
         });
 
         window.location.reload();
@@ -88,7 +88,7 @@ class Assets extends Component {
             <React.Fragment>
                 <div className="row">
                   <div className="col-sm">
-                    <h3>Services</h3>
+                    <h3>Expenses</h3>
                     <h5><span id="services_estimated_principal_total" data-toggle="tooltip" data-html="true" title="Est. at ${CONFIG.SERVICE_ESTIMATE_APR}% APR">${this.getTotalEstimatedPrincipal()}</span></h5>
                     <span id="services_accrued_total" data-toggle="tooltip" data-html="true" title="Computing...">${this.state.accrued_sum}</span>
                   </div>
@@ -98,7 +98,7 @@ class Assets extends Component {
 
                 <div className="row">
                   <div className="col-sm">
-                    <h5>New service</h5>
+                    <h5>New expense</h5>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-row form-group">
                             <div className="col">
@@ -109,15 +109,15 @@ class Assets extends Component {
                                     name="name"
                                     value={this.state.name}
                                     onChange={this.handleInputChange} />
-                                <small>eg. Job</small>
+                                <small>eg. Taxes</small>
                             </div>
                             <div className="col">
                                 <input 
                                     className="form-control form-control-lg"
                                     type="text"
-                                    placeholder="Monthly Income"
-                                    name="income"
-                                    value={this.state.income}
+                                    placeholder="Monthly Expense"
+                                    name="expense"
+                                    value={this.state.expense}
                                     onChange={this.handleInputChange} />
                                 <small>eg. 1000</small>
                             </div>
@@ -125,8 +125,8 @@ class Assets extends Component {
                         <div className="form-row form-group">
                             <div className="col">
                                 <button
-                                    className="btn btn-block btn-warning btn-lg"
-                                    type="submit">Add service</button>
+                                    className="btn btn-block btn-danger btn-lg"
+                                    type="submit">Add expense</button>
                             </div>
                         </div>    
                     </form>
@@ -147,7 +147,7 @@ class Assets extends Component {
                             </div>
                             <div className="col-sm">
                                 <div className="form-label-group">
-                                <label for="gains" data-toggle="tooltip" data-html="true" title="">Credit</label>
+                                <label for="gains" data-toggle="tooltip" data-html="true" title="">Debit</label>
                                     <input type="text" className="form-control" value={item.accrued} disabled />
                                 </div>
                             </div>
@@ -155,11 +155,11 @@ class Assets extends Component {
                     </React.Fragment>
                 ))}
 
-                {this.props.items.length === 0 && <center>No services</center>}
+                {this.props.items.length === 0 && <center>No expenses</center>}
             </React.Fragment>
         );
     }
 }
   
 
-export default Assets;
+export default Expenses;
