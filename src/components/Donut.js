@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import Highcharts from 'highcharts'
+import highchartsExporting from 'highcharts/modules/exporting';
 import HighchartsReact from 'highcharts-react-official'
 
 import CONFIG from '../config';
+
+highchartsExporting(Highcharts);
 
 class Donut extends Component {
     constructor(props) {

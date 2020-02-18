@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Highcharts from 'highcharts'
-import highchartsSankey from "highcharts/modules/sankey";
+import highchartsSankey from 'highcharts/modules/sankey';
+import highchartsExporting from 'highcharts/modules/exporting';
 import HighchartsReact from 'highcharts-react-official'
 
 import CONFIG from '../config';
 
 highchartsSankey(Highcharts);
+highchartsExporting(Highcharts);
 
 class Sankey extends Component {
     constructor(props) {
