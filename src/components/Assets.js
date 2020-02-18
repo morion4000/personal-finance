@@ -173,7 +173,8 @@ class Assets extends Component {
                     </form>
                   </div>
                 </div>
-
+                
+                <hr />
 
                 <table className="table table-hover align-items-center table-borderless">
                     <thead>

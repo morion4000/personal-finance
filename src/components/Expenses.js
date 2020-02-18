@@ -157,6 +157,8 @@ class Expenses extends Component {
                   </div>
                 </div>
 
+                <hr />
+
                 <table className="table table-hover align-items-center table-borderless">
                     <thead>
                         <tr>
