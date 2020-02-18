@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import NumberFormat from 'react-number-format';
 
 import CONFIG from '../config';
 
@@ -45,7 +46,10 @@ class Alert extends Component {
         return (    
           <div className="alert alert-primary" role="alert">
             <p>Runway: <span data-toggle="tooltip" data-html="true" title="Runway">{this.state.runway} Years</span></p>
-            <p>Est. Worth: <span data-toggle="tooltip" data-html="true" title="@ 7% APR">${this.state.estimated_worth}</span></p>
+            <p>Est. Worth:&nbsp;
+              <span data-toggle="tooltip" data-html="true" title="@ 7% APR">
+                <NumberFormat value={this.state.estimated_worth} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+              </span></p>
           </div>
         );
     }

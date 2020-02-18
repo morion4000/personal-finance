@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import NumberFormat from 'react-number-format';
 
 import CONFIG from '../config';
 import Storage from './Storage';
@@ -98,8 +99,10 @@ class Assets extends Component {
                 <div className="row">
                   <div className="col-sm">
                     <h3>Savings <span className="badge badge-secondary">{this.getAssetsTotalApr()}%</span></h3>
-                    <h5>${this.getAssetsTotalPrincipal()}</h5>
-                    <span data-toggle="tooltip" data-html="true" title="Computing...">${this.state.accrued_sum}</span>
+                    <h5><NumberFormat value={this.getAssetsTotalPrincipal()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={3} /></h5>
+                    <span data-toggle="tooltip" data-html="true" title="Computing...">
+                    <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
+                    </span>
                   </div>
                 </div>
 

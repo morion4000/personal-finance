@@ -89,8 +89,14 @@ class Expenses extends Component {
                 <div className="row">
                   <div className="col-sm">
                     <h3>Expenses</h3>
-                    <h5><span id="services_estimated_principal_total" data-toggle="tooltip" data-html="true" title="Est. at ${CONFIG.SERVICE_ESTIMATE_APR}% APR">${this.getTotalEstimatedPrincipal()}</span></h5>
-                    <span id="services_accrued_total" data-toggle="tooltip" data-html="true" title="Computing...">${this.state.accrued_sum}</span>
+                    <h5>
+                        <span data-toggle="tooltip" data-html="true" title="Est. at ${CONFIG.SERVICE_ESTIMATE_APR}% APR">
+                            <NumberFormat value={this.getTotalEstimatedPrincipal()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={3} />
+                        </span>
+                    </h5>
+                    <span data-toggle="tooltip" data-html="true" title="Computing...">
+                        <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
+                    </span>
                   </div>
                 </div>
 

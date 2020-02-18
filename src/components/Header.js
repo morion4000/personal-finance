@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import NumberFormat from 'react-number-format';
 
 import CONFIG from '../config';
 
@@ -59,25 +60,44 @@ class Header extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-sm">
-                        <h1 className="display-4">Money.Stream</h1>
-                        <p className="lead">Visualise Financial Streams.</p>
+                        <h1 className="display-4">Personal Finance</h1>
+                        <p className="lead">Visualise Money Streams</p>
                         <button type="button" className="btn btn-primary btn-lg">
-                            Streaming <span className="badge badge-light">${this.state.accrued_sum}</span>
+                            Streaming&nbsp;&nbsp;
+                            <span className="badge badge-light">
+                                <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={4} />
+                            </span>
                         </button>
                         <br /><br />
                         <p>
-                            Income:
-                            <span className="badge badge-light" data-toggle="tooltip" data-html="true" title="Hourly">${this.state.monthly_income / 30 / 24}</span> /
-                            <span className="badge badge-light" data-toggle="tooltip" data-html="true" title="Daily">${this.state.monthly_income / 30}</span> /
-                            <span className="badge badge-light" data-toggle="tooltip" data-html="true" title="Monthly">${this.state.monthly_income}</span> /
-                            <span className="badge badge-light" data-toggle="tooltip" data-html="true" title="Yearly">${this.state.monthly_income * 12}</span>
+                            Income:&nbsp;
+                            <span className="badge badge-light" data-toggle="tooltip" data-html="true" title="Hourly">
+                                <NumberFormat value={this.state.monthly_income / 30 / 24} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} />
+                            </span> /&nbsp;
+                            <span className="badge badge-light" data-toggle="tooltip" data-html="true" title="Daily">
+                                <NumberFormat value={this.state.monthly_income / 30} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={1} />
+                            </span> /&nbsp;
+                            <span className="badge badge-light" data-toggle="tooltip" data-html="true" title="Monthly">
+                                <NumberFormat value={this.state.monthly_income} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                            </span> /&nbsp;
+                            <span className="badge badge-light" data-toggle="tooltip" data-html="true" title="Yearly">
+                                <NumberFormat value={this.state.monthly_income * 12} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                            </span>
                         </p>
                         <p>
-                            Expenses:
-                            <span className="badge badge-danger" data-toggle="tooltip" data-html="true" title="Hourly">${this.state.monthly_expenses / 30 / 24}</span> /
-                            <span className="badge badge-danger" data-toggle="tooltip" data-html="true" title="Daily">${this.state.monthly_expenses / 30}</span> /
-                            <span className="badge badge-danger" data-toggle="tooltip" data-html="true" title="Monthly">${this.state.monthly_expenses}</span> /
-                            <span className="badge badge-danger" data-toggle="tooltip" data-html="true" title="Yearly">${this.state.monthly_expenses * 12}</span>
+                            Expenses:&nbsp;
+                            <span className="badge badge-danger" data-toggle="tooltip" data-html="true" title="Hourly">
+                                <NumberFormat value={this.state.monthly_expenses / 30 / 24} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} />
+                            </span> /&nbsp;
+                            <span className="badge badge-danger" data-toggle="tooltip" data-html="true" title="Daily">
+                                <NumberFormat value={this.state.monthly_expenses / 30} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={1} />
+                            </span> /&nbsp;
+                            <span className="badge badge-danger" data-toggle="tooltip" data-html="true" title="Monthly">
+                                <NumberFormat value={this.state.monthly_expenses} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                            </span> /&nbsp;
+                            <span className="badge badge-danger" data-toggle="tooltip" data-html="true" title="Yearly">
+                                <NumberFormat value={this.state.monthly_expenses * 12} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                            </span>
                         </p>
                         </div>
                         <div className="col-sm">
