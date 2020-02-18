@@ -196,7 +196,7 @@ class Assets extends Component {
                                     <input type="text" className="form-control" defaultValue={item.accrued} disabled />
                                 </td>
                                 <td>
-                                    <button className="btn btn-danger" onClick={this.handleDelete.bind(this, item)}>x</button>
+                                    <button className="btn btn-secondary btn-sm" onClick={this.handleDelete.bind(this, item)}>x</button>
                                 </td>
                             </tr>    
                             <tr className="table-divider"></tr>
