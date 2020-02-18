@@ -30,10 +30,9 @@ class Header extends Component {
 
     componentDidMount() {
         const _this = this;
+        let accrued_sum = 0;
 
         setInterval(function() {
-          let accrued_sum = 0;
-          
           _this.props.items.map(function(item) {
             let accrued = item.accrued || 0;
     

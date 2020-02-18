@@ -8,7 +8,7 @@ class Assets extends Component {
         super(props);
 
         this.state = {
-            total_accrued: 0
+            accrued_sum: 0
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -29,6 +29,7 @@ class Assets extends Component {
         e.preventDefault();
 
         Storage.addItem({
+            id: Date.now(),
             type: CONFIG.ITEM_TYPE.ASSET,
             name: this.state.name,
             amount: this.state.principal,
@@ -37,7 +38,6 @@ class Assets extends Component {
         });
 
         this.setState({
-            id: Date.now(),
             name: '',
             principal: '',
             apr: ''
@@ -46,9 +46,10 @@ class Assets extends Component {
 
     componentDidMount() {
         const _this = this;
-        let total_accrued = 0;
     
         setInterval(function() {
+          let accrued_sum = 0;
+
           _this.props.items.map(function(item) {
             let accrued = item.accrued || 0;
     
@@ -56,13 +57,13 @@ class Assets extends Component {
     
             item.accrued = accrued;
             
-            total_accrued += accrued;
+            accrued_sum += accrued;
     
             return item;
           });
 
           _this.setState({
-            total_accrued: total_accrued
+            accrued_sum: accrued_sum
           });
 
           _this.forceUpdate();
@@ -86,7 +87,7 @@ class Assets extends Component {
             total_principal += asset.amount;
         });
 
-        return total_principal + this.state.total_accrued;
+        return total_principal + this.state.accrued_sum;
     }
 
     render() {
@@ -96,7 +97,7 @@ class Assets extends Component {
                   <div className="col-sm">
                     <h3>Savings <span className="badge badge-secondary">{this.getAssetsTotalApr()}%</span></h3>
                     <h5>${this.getAssetsTotalPrincipal()}</h5>
-                    <span data-toggle="tooltip" data-html="true" title="Computing...">${this.state.total_accrued}</span>
+                    <span data-toggle="tooltip" data-html="true" title="Computing...">${this.state.accrued_sum}</span>
                   </div>
                 </div>
 
@@ -167,6 +168,8 @@ class Assets extends Component {
                         </div>
                     </div>
                 ))}
+
+                {this.props.items.length === 0 && <center>No assets</center>}
             </React.Fragment>
         );
     }
