@@ -149,31 +149,34 @@ class Assets extends Component {
 
                 <hr />
 
-                {this.props.items.map(item => (
-                    <React.Fragment>
-                        <br />
-                        <div className="row">
-                            <div className="col-sm">
-                                <div className="form-label-group">
-                                    <strong><label for="principal" data-toggle="tooltip" data-html="true" title="">{item.name}</label></strong>
-                                    <input type="text" className="form-control" value={item.amount} disabled />
-                                </div>
-                            </div>
-                            <div className="col-sm">
-                                <div className="form-label-group">
-                                <label for="gains" data-toggle="tooltip" data-html="true" title="">Credit</label>
-                                    <input type="text" className="form-control" value={item.accrued} disabled />
-                                </div>
-                            </div>
-                            <div className="col-2">
-                                <div className="form-label-group">
-                                    <br />
-                                    <button className="btn btn-danger" onClick={this.handleDelete.bind(this, item)}>x</button>
-                                </div>
-                            </div>
-                        </div>
-                    </React.Fragment>
-                ))}
+                <table className="table table-hover align-items-center table-borderless">
+                    <thead>
+                        <tr>
+                            <th scope="col">Service</th>
+                            <th scope="col">Credit</th>
+                            <th scope="col">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.props.items.map(item => (
+                            <React.Fragment>
+                                <tr className="bg-white">
+                                    <th>
+                                        <strong>{item.name}</strong><br />
+                                        <NumberFormat value={item.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                                    </th>
+                                    <td>
+                                        <input type="text" className="form-control" value={item.accrued} disabled />
+                                    </td>
+                                    <td>
+                                        <button className="btn btn-danger" onClick={this.handleDelete.bind(this, item)}>x</button>
+                                    </td>
+                                </tr>
+                                <tr className="table-divider"></tr>
+                            </React.Fragment>          
+                        ))}
+                    </tbody>
+                </table>
 
                 {this.props.items.length === 0 && <center>No services</center>}
             </React.Fragment>

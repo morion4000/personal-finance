@@ -49,7 +49,7 @@ class Donut extends Component {
                 backgroundColor: 'transparent'
               },
               title: {
-                text: 'Ratio',
+                text: 'Health',
                 align: 'center',
                 verticalAlign: 'middle',
                 y: 60
