@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import CONFIG from '../config';
-import Storage from './Storage';
 
 class Alert extends Component {
     constructor(props) {
@@ -15,15 +14,15 @@ class Alert extends Component {
       this.props.items.map(function(item) {
         let principal = 0;
 
-        if (item.type === Storage.TYPES.SERVICE) {
+        if (item.type === CONFIG.ITEM_TYPE.SERVICE) {
             principal = item.amount * 12 / CONFIG.SERVICE_ESTIMATE_APR * 100;
 
             monthly_revenue += item.amount;
-        } else if (item.type === Storage.TYPES.ASSET) {
+        } else if (item.type === CONFIG.ITEM_TYPE.ASSET) {
             principal = item.amount;
 
             monthly_revenue += item.amount * item.apr / 100 / 12;
-        } else if (item.type === Storage.TYPES.EXPENSE) {
+        } else if (item.type === CONFIG.ITEM_TYPE.EXPENSE) {
             expenses_sum += item.amount;
         }
 

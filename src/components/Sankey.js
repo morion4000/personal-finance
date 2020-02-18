@@ -3,7 +3,7 @@ import Highcharts from 'highcharts'
 import highchartsSankey from "highcharts/modules/sankey";
 import HighchartsReact from 'highcharts-react-official'
 
-import Storage from './Storage';
+import CONFIG from '../config';
 
 highchartsSankey(Highcharts);
 
@@ -21,19 +21,19 @@ class Sankey extends Component {
 
         props.items.map(function(item) {
           switch (item.type) {
-            case Storage.TYPES.ASSET:
+            case CONFIG.ITEM_TYPE.ASSET:
               const monthly_income = item.amount * item.apr / 100 / 12;
 
-              assets_sum += monthly_income;
+              assets_sum += parseInt(monthly_income);
               data.push([item.name, 'Savings', parseInt(monthly_income)]);
               break;
 
-            case Storage.TYPES.SERVICE:
+            case CONFIG.ITEM_TYPE.SERVICE:
               services_sum += item.amount;
               data.push([item.name, 'Services', item.amount]);
               break;
 
-            case Storage.TYPES.EXPENSE:
+            case CONFIG.ITEM_TYPE.EXPENSE:
               expenses_sum += item.amount;
               data.push(['Expenses', item.name, item.amount]);
               break;

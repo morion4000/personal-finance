@@ -9,15 +9,17 @@ import Donut from '../components/Donut';
 import Alert from '../components/Alert';
 import Storage from '../components/Storage';
 
+import CONFIG from '../config';
+
 class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       all_items: Storage.getItems(),
-      assets: Storage.getItems(Storage.TYPES.ASSET),
-      services: Storage.getItems(Storage.TYPES.SERVICE),
-      expenses: Storage.getItems(Storage.TYPES.EXPENSE)
+      assets: Storage.getItems(CONFIG.ITEM_TYPE.ASSET),
+      services: Storage.getItems(CONFIG.ITEM_TYPE.SERVICE),
+      expenses: Storage.getItems(CONFIG.ITEM_TYPE.EXPENSE)
     }
   }
 

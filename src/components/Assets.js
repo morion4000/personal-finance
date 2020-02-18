@@ -29,11 +29,18 @@ class Assets extends Component {
         e.preventDefault();
 
         Storage.addItem({
-            type: Storage.TYPES.ASSET,
+            type: CONFIG.ITEM_TYPE.ASSET,
             name: this.state.name,
             amount: this.state.principal,
             apr: this.state.apr,
             compounds: false
+        });
+
+        this.setState({
+            id: Date.now(),
+            name: '',
+            principal: '',
+            apr: ''
         });
     }
 
@@ -45,7 +52,7 @@ class Assets extends Component {
           _this.props.items.map(function(item) {
             let accrued = item.accrued || 0;
     
-            accrued += parseInt(item.amount) * parseInt(item.apr) / 100 / CONFIG.MILISECONDS_IN_YEAR * CONFIG.REFRESH_INTERVAL;
+            accrued += item.amount * item.apr / 100 / CONFIG.MILISECONDS_IN_YEAR * CONFIG.REFRESH_INTERVAL;
     
             item.accrued = accrued;
             
@@ -66,7 +73,7 @@ class Assets extends Component {
         let total_apr = 0;
 
         this.props.items.forEach(function(asset) {
-            total_apr += parseInt(asset.apr);
+            total_apr += asset.apr;
         });
 
         return (total_apr / this.props.items.length).toFixed(1);
@@ -90,9 +97,59 @@ class Assets extends Component {
                     <h3>Savings <span className="badge badge-secondary">{this.getAssetsTotalApr()}%</span></h3>
                     <h5>${this.getAssetsTotalPrincipal()}</h5>
                     <span data-toggle="tooltip" data-html="true" title="Computing...">${this.state.total_accrued}</span>
-                    <hr />
                   </div>
                 </div>
+
+                <hr />
+
+                <div className="row">
+                  <div className="col-sm">
+                    <h5>New asset</h5>
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="form-row form-group">
+                            <div className="col">
+                                <input 
+                                    className="form-control form-control-lg"
+                                    type="text"
+                                    placeholder="Name"
+                                    name="name"
+                                    value={this.state.name}
+                                    onChange={this.handleInputChange} />
+                                <small>eg. Bank deposit</small>
+                            </div>
+                            <div className="col">
+                                <input 
+                                    className="form-control form-control-lg"
+                                    type="text"
+                                    placeholder="Principal"
+                                    name="principal"
+                                    value={this.state.principal}
+                                    onChange={this.handleInputChange} />
+                                <small>eg. 1000</small>
+                            </div>
+                            <div className="col">
+                                <input
+                                    className="form-control form-control-lg"
+                                    type="text"
+                                    placeholder="APR"
+                                    name="apr"
+                                    value={this.state.apr}
+                                    onChange={this.handleInputChange} />
+                                <small>eg. 4</small>
+                            </div>
+                        </div>
+                        <div className="form-row form-group">
+                            <div className="col">
+                                <button
+                                    className="btn btn-block btn-success btn-lg"
+                                    type="submit">Add asset</button>
+                            </div>
+                        </div>    
+                    </form>
+                  </div>
+                </div>
+
+                <hr />
 
                 {this.props.items.map(item => (
                     <div className="row">
@@ -110,61 +167,6 @@ class Assets extends Component {
                         </div>
                     </div>
                 ))}
-
-                <hr />
-
-                <div className="row">
-                  <div className="col-sm">
-                    <h5>New asset</h5>
-                    <form onSubmit={this.handleSubmit}>
-                        <div className="form-row form-group">
-                            <div className="col">
-                                <input 
-                                    className="form-control form-control-lg"
-                                    type="text"
-                                    placeholder="Name"
-                                    name="name"
-                                    value={this.state.name}
-                                    onChange={this.handleInputChange} />
-                                <small>i.e. Bank deposit</small>
-                            </div>
-                            <div className="col">
-                                <input 
-                                    className="form-control form-control-lg"
-                                    type="text"
-                                    placeholder="principal"
-                                    name="principal"
-                                    value={this.state.principal}
-                                    onChange={this.handleInputChange} />
-                                <small>i.e. 1000</small>
-                            </div>
-                            <div className="col">
-                                <input
-                                    className="form-control form-control-lg"
-                                    type="text"
-                                    placeholder="APR"
-                                    name="apr"
-                                    value={this.state.apr}
-                                    onChange={this.handleInputChange} />
-                                <small>i.e. 4</small>
-                            </div>
-                        </div>
-                        <div className="form-row form-group">
-                            <div className="col">
-                                <button
-                                    className="btn btn-block btn-success btn-lg"
-                                    type="submit">Add asset</button>
-                            </div>
-                        </div>
-                        {/*
-                        <div className="text-center">
-                            <span className="text-small text-muted">By clicking 'Create Token' you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>
-                            </span>
-                        </div>
-                        */}
-                    </form>
-                  </div>
-                </div>
             </React.Fragment>
         );
     }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 
-import Storage from './Storage';
+import CONFIG from '../config';
 
 class Donut extends Component {
     constructor(props) {
@@ -16,17 +16,17 @@ class Donut extends Component {
 
         props.items.map(function(item) {
           switch (item.type) {
-            case Storage.TYPES.ASSET:
+            case CONFIG.ITEM_TYPE.ASSET:
               const monthly_income = item.amount * item.apr / 100 / 12;
 
               income_sum += monthly_income;
               break;
 
-            case Storage.TYPES.SERVICE:
+            case CONFIG.ITEM_TYPE.SERVICE:
                 income_sum += item.amount;
               break;
 
-            case Storage.TYPES.EXPENSE:
+            case CONFIG.ITEM_TYPE.EXPENSE:
               expenses_sum += item.amount;
               break;
 
