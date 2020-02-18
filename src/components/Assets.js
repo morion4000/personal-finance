@@ -82,7 +82,7 @@ class Assets extends Component {
         }, CONFIG.REFRESH_INTERVAL);
     }
 
-    getAssetsTotalApr() {
+    getTotalApr() {
         let total_apr = 0;
 
         this.props.items.forEach(function(asset) {
@@ -95,14 +95,14 @@ class Assets extends Component {
         return total_apr.toFixed(1);
     }
 
-    getAssetsTotalPrincipal() {
-        let total_principal = 0;
+    getMonthlyCredit() {
+        let monthly_credit = 0;
 
         this.props.items.forEach(function(asset) {
-            total_principal += asset.amount;
+            monthly_credit += asset.amount * asset.apr / 100 / 12;
         });
 
-        return total_principal + this.state.accrued_sum;
+        return monthly_credit;
     }
 
     render() {
@@ -113,9 +113,9 @@ class Assets extends Component {
             <React.Fragment>
                 <div className="row">
                   <div className="col-sm">
-                    <h3><strong>Savings</strong> <span className="badge badge-secondary">{this.getAssetsTotalApr()}%</span></h3>
+                    <h3><strong>Savings</strong> <span className="badge badge-secondary">{this.getTotalApr()}%</span></h3>
                     <h5>
-                        Total: <NumberFormat value={this.getAssetsTotalPrincipal()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={3} />
+                        Monthly credit: <NumberFormat value={this.getMonthlyCredit()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={3} />
                     </h5>
                     <span data-toggle="tooltip" data-html="true" title="Computing...">
                         Credit: <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
@@ -174,7 +174,6 @@ class Assets extends Component {
                   </div>
                 </div>
 
-                <hr />
 
                 <table className="table table-hover align-items-center table-borderless">
                     <thead>
@@ -184,26 +183,24 @@ class Assets extends Component {
                             <th scope="col">&nbsp;</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {this.props.items.map(item => (
-                            <React.Fragment>
-                                <tr className="bg-white">
-                                    <th>
-                                        <strong>{item.name}</strong><br />
-                                        <NumberFormat value={item.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
-                                    </th>
-                                    <td>
-                                        <label for="gains" data-toggle="tooltip" data-html="true" title="">APR {item.apr}%</label>
-                                        <input type="text" className="form-control" value={item.accrued} disabled />
-                                    </td>
-                                    <td>
-                                        <button className="btn btn-danger" onClick={this.handleDelete.bind(this, item)}>x</button>
-                                    </td>
-                                </tr>
-                                <tr className="table-divider"></tr>
-                            </React.Fragment>          
-                        ))}
-                    </tbody>
+                    {this.props.items.map(item => (
+                        <tbody key={item.id} style={{borderTop: 'none'}}>        
+                            <tr className="bg-white">
+                                <th>
+                                    <strong>{item.name}</strong><br />
+                                    <NumberFormat value={item.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                                </th>
+                                <td>
+                                    <label data-toggle="tooltip" data-html="true" title="">APR {item.apr}%</label>
+                                    <input type="text" className="form-control" defaultValue={item.accrued} disabled />
+                                </td>
+                                <td>
+                                    <button className="btn btn-danger" onClick={this.handleDelete.bind(this, item)}>x</button>
+                                </td>
+                            </tr>    
+                            <tr className="table-divider"></tr>
+                        </tbody>        
+                    ))}
                 </table>
 
                 {this.props.items.length === 0 && <center>No assets</center>}

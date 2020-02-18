@@ -8,6 +8,7 @@ class Alert extends Component {
       super(props);
 
       let estimated_worth = 0;
+      let principal_sum = 0;
       let expenses_sum = 0;
       let monthly_revenue = 0;
       let runway = 0;
@@ -23,6 +24,7 @@ class Alert extends Component {
             principal = item.amount;
 
             monthly_revenue += item.amount * item.apr / 100 / 12;
+            principal_sum += item.amount;
         } else if (item.type === CONFIG.ITEM_TYPE.EXPENSE) {
             expenses_sum += item.amount;
         }
@@ -33,7 +35,7 @@ class Alert extends Component {
       });
 
       if (monthly_revenue < expenses_sum) {
-        runway = estimated_worth / Math.abs(monthly_revenue - expenses_sum) * 12;
+        runway = principal_sum / ((expenses_sum - monthly_revenue) * 12);
       }
 
       this.state = {
@@ -45,7 +47,11 @@ class Alert extends Component {
     render() {
         return (    
           <div className="alert alert-dark" role="alert">
-            <p><strong>Runway:</strong> <span data-toggle="tooltip" data-html="true" title="Runway">{this.state.runway} Years</span></p>
+            <p>
+              <strong>Runway:</strong> <span data-toggle="tooltip" data-html="true" title="Runway">
+                <NumberFormat value={this.state.runway} displayType={'text'} thousandSeparator={true} decimalScale={1} /> Years
+              </span>
+            </p>
             <p><strong>Est. Worth:</strong>&nbsp;
               <span data-toggle="tooltip" data-html="true" title="@ 7% APR">
                 <NumberFormat value={this.state.estimated_worth} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />

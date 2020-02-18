@@ -1,6 +1,6 @@
 {
-  "short_name": "Emint",
-  "name": "Electronic Mint",
+  "short_name": "Personal Finance",
+  "name": "Visualise Money Streams",
   "icons": [
     {
       "src": "favicon.ico",

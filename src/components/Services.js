@@ -48,6 +48,12 @@ class Assets extends Component {
         window.location.reload();
     }
 
+    handleDelete(item) {
+        Storage.removeItem(item.id);
+
+        window.location.reload();
+    }
+
     componentDidMount() {
         const _this = this;
 
@@ -85,10 +91,14 @@ class Assets extends Component {
         return total_principal + this.state.accrued_sum;
     }
 
-    handleDelete(item) {
-        Storage.removeItem(item.id);
+    getMonthlyCredit() {
+        let monthly_credit = 0;
 
-        window.location.reload();
+        this.props.items.forEach(function(asset) {
+            monthly_credit += asset.amount;
+        });
+
+        return monthly_credit;
     }
 
     render() {
@@ -101,7 +111,7 @@ class Assets extends Component {
                   <div className="col-sm">
                     <h3><strong>Services</strong></h3>
                     <h5>
-                        Est. Worth: <NumberFormat value={this.getTotalEstimatedPrincipal()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={3} />
+                        Monthy credit: <NumberFormat value={this.getMonthlyCredit()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={3} />
                     </h5>
                     <span data-toggle="tooltip" data-html="true" title="Computing...">
                         Credit: <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
@@ -147,8 +157,6 @@ class Assets extends Component {
                   </div>
                 </div>
 
-                <hr />
-
                 <table className="table table-hover align-items-center table-borderless">
                     <thead>
                         <tr>
@@ -157,25 +165,23 @@ class Assets extends Component {
                             <th scope="col">&nbsp;</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {this.props.items.map(item => (
-                            <React.Fragment>
-                                <tr className="bg-white">
-                                    <th>
-                                        <strong>{item.name}</strong><br />
-                                        <NumberFormat value={item.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
-                                    </th>
-                                    <td>
-                                        <input type="text" className="form-control" value={item.accrued} disabled />
-                                    </td>
-                                    <td>
-                                        <button className="btn btn-danger" onClick={this.handleDelete.bind(this, item)}>x</button>
-                                    </td>
-                                </tr>
-                                <tr className="table-divider"></tr>
-                            </React.Fragment>          
-                        ))}
-                    </tbody>
+                    {this.props.items.map(item => (
+                        <tbody key={item.id} style={{borderTop: 'none'}}>
+                            <tr className="bg-white" key={item.id}>
+                                <th>
+                                    <strong>{item.name}</strong><br />
+                                    <NumberFormat value={item.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                                </th>
+                                <td>
+                                    <input type="text" className="form-control" defaultValue={item.accrued} disabled />
+                                </td>
+                                <td>
+                                    <button className="btn btn-danger" onClick={this.handleDelete.bind(this, item)}>x</button>
+                                </td>
+                            </tr>
+                            <tr className="table-divider"></tr>
+                        </tbody>        
+                    ))}
                 </table>
 
                 {this.props.items.length === 0 && <center>No services</center>}
