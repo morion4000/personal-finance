@@ -5,6 +5,8 @@ import Footer from '../components/Footer';
 import Assets from '../components/Assets';
 import Services from '../components/Services';
 import Sankey from '../components/Sankey';
+import Donut from '../components/Donut';
+import Alert from '../components/Alert';
 import Storage from '../components/Storage';
 
 class Home extends Component {
@@ -12,27 +14,26 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      assets: Storage.getAssets(),
-      services: Storage.getServices(),
-      expenses: Storage.getExpenses()
+      all_items: Storage.getItems(),
+      assets: Storage.getItems(Storage.TYPES.ASSET),
+      services: Storage.getItems(Storage.TYPES.SERVICE),
+      expenses: Storage.getItems(Storage.TYPES.EXPENSE)
     }
   }
 
-  componentWillMount() {
-    
+  componentDidMount() {
   }
 
   render() {
     return (
       <div>
-        <Header />
+        <Header items={this.state.all_items}>
+          <Donut items={this.state.all_items} />
+        </Header>
 
         <div class="container">
-          <div class="alert alert-primary" role="alert">
-            <p>Runway: <span id="runway" data-toggle="tooltip" data-html="true" title="Runway">0 Years</span></p>
-            <p>Est. Worth: <span id="net_worth" data-toggle="tooltip" data-html="true" title="@ 7% APR"></span></p>
-          </div>
-
+          <Alert items={this.state.all_items} />
+          
           <br />
 
           <div class="row">
@@ -44,11 +45,13 @@ class Home extends Component {
               <Services items={this.state.services} />
             </div>
           </div>
-        </div>
 
-        <div class="row">
-          <div class="col-sm">
-            <Sankey />
+          <br />
+
+          <div class="row">
+            <div class="col-sm">
+              <Sankey items={this.state.all_items} />
+            </div>
           </div>
         </div>
 

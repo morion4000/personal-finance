@@ -1,6 +1,41 @@
 import React, { Component } from 'react';
 
+import CONFIG from '../config';
+
 class Assets extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            total_accrued: 0
+        }
+    }
+
+    componentDidMount() {
+        const _this = this;
+        let total_accrued = 0;
+    
+        setInterval(function() {
+          _this.props.items.map(function(item) {
+            let accrued = item.accrued || 0;
+    
+            accrued += item.amount * item.apr / 100 / CONFIG.MILISECONDS_IN_YEAR * CONFIG.REFRESH_INTERVAL;
+    
+            item.accrued = accrued;
+            
+            total_accrued += accrued;
+    
+            return item;
+          });
+
+          _this.setState({
+            total_accrued: total_accrued
+          });
+
+          _this.forceUpdate();
+        }, CONFIG.REFRESH_INTERVAL);
+    }
+
     getAssetsTotalApr() {
         let total_apr = 0;
 
@@ -15,10 +50,10 @@ class Assets extends Component {
         let total_principal = 0;
 
         this.props.items.forEach(function(asset) {
-            total_principal += asset.principal;
+            total_principal += asset.amount;
         });
 
-        return total_principal.toFixed(5);
+        return total_principal + this.state.total_accrued;
     }
 
     render() {
@@ -28,7 +63,7 @@ class Assets extends Component {
                   <div class="col-sm">
                     <h3>Savings <span class="badge badge-secondary">{this.getAssetsTotalApr()}%</span></h3>
                     <h5>${this.getAssetsTotalPrincipal()}</h5>
-                    <span id="assets_accrued_total" data-toggle="tooltip" data-html="true" title="Computing...">$0</span>
+                    <span data-toggle="tooltip" data-html="true" title="Computing...">${this.state.total_accrued}</span>
                     <hr />
                   </div>
                 </div>
@@ -38,13 +73,13 @@ class Assets extends Component {
                         <div class="col-sm">
                             <div class="form-label-group">
                                 <strong><label for="principal" data-toggle="tooltip" data-html="true" title="">{item.name}</label></strong>
-                                <input type="text" class="form-control" value={item.principal} disabled />
+                                <input type="text" class="form-control" value={item.amount} disabled />
                             </div>
                         </div>
                         <div class="col-sm">
                             <div class="form-label-group">
                             <label for="gains" data-toggle="tooltip" data-html="true" title="">APR {item.apr}%</label>
-                                <input type="text" class="form-control" disabled />
+                                <input type="text" class="form-control" value={item.accrued} disabled />
                             </div>
                         </div>
                     </div>
