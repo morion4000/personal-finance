@@ -111,7 +111,7 @@ class Expenses extends Component {
                   <div className="col-sm">
                     <h3><strong>Expenses</strong></h3>
                     <h5>
-                        Monthly debit: <NumberFormat value={this.getMonthlyDebit()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={3} />
+                        Monthly debit: <NumberFormat value={this.getMonthlyDebit()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
                     </h5>
                     <span data-toggle="tooltip" data-html="true" title="Computing...">
                         Debit: <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />

@@ -8,7 +8,6 @@ import Expenses from '../components/Expenses';
 import Sankey from '../components/Sankey';
 import Donut from '../components/Donut';
 import Alert from '../components/Alert';
-import Announcement from '../components/Announcement';
 import Storage from '../components/Storage';
 
 import CONFIG from '../config';

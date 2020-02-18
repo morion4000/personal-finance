@@ -111,7 +111,7 @@ class Assets extends Component {
                   <div className="col-sm">
                     <h3><strong>Services</strong></h3>
                     <h5>
-                        Monthy credit: <NumberFormat value={this.getMonthlyCredit()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={3} />
+                        Monthy credit: <NumberFormat value={this.getMonthlyCredit()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
                     </h5>
                     <span data-toggle="tooltip" data-html="true" title="Computing...">
                         Credit: <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
