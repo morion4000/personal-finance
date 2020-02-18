@@ -113,12 +113,12 @@ class Assets extends Component {
             <React.Fragment>
                 <div className="row">
                   <div className="col-sm">
-                    <h3>Savings <span className="badge badge-secondary">{this.getAssetsTotalApr()}%</span></h3>
+                    <h3><strong>Savings</strong> <span className="badge badge-secondary">{this.getAssetsTotalApr()}%</span></h3>
                     <h5>
-                        <NumberFormat value={this.getAssetsTotalPrincipal()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={3} />
+                        Total: <NumberFormat value={this.getAssetsTotalPrincipal()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={3} />
                     </h5>
                     <span data-toggle="tooltip" data-html="true" title="Computing...">
-                        <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
+                        Credit: <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
                     </span>
                   </div>
                 </div>

@@ -99,14 +99,12 @@ class Assets extends Component {
             <React.Fragment>
                 <div className="row">
                   <div className="col-sm">
-                    <h3>Services</h3>
+                    <h3><strong>Services</strong></h3>
                     <h5>
-                        <span data-toggle="tooltip" data-html="true" title="Est. at ${CONFIG.SERVICE_ESTIMATE_APR}% APR">
-                            <NumberFormat value={this.getTotalEstimatedPrincipal()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={3} />
-                        </span>
+                        Est. Worth: <NumberFormat value={this.getTotalEstimatedPrincipal()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={3} />
                     </h5>
                     <span data-toggle="tooltip" data-html="true" title="Computing...">
-                        <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
+                        Credit: <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
                     </span>
                   </div>
                 </div>

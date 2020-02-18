@@ -59,17 +59,17 @@ class Header extends Component {
             <div className="jumbotron jumbotron-fluid">
                 <div className="container">
                     <div className="row">
-                        <div className="col-sm">
+                        <div className="col-5">
                         <h1 className="display-4">Personal Finance</h1>
                         <p className="lead">Visualise Money Streams</p>
-                        <button type="button" className="btn btn-primary btn-lg">
+                        <button type="button" className="btn btn-primary btn-lg btn-block">
                             Streaming&nbsp;&nbsp;
-                            <span className="badge badge-light">
+                            <h5 style={{'color': 'rgb(177, 190, 212)'}}>
                                 <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={6} />
-                            </span>
+                            </h5>
                         </button>
                         <br /><br />
-                        <p>
+                        <h5>
                             Income:&nbsp;
                             <span className="badge badge-light" data-toggle="tooltip" data-html="true" title="Hourly">
                                 <NumberFormat value={this.state.monthly_income / 30 / 24} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} />
@@ -83,7 +83,7 @@ class Header extends Component {
                             <span className="badge badge-light" data-toggle="tooltip" data-html="true" title="Yearly">
                                 <NumberFormat value={this.state.monthly_income * 12} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
                             </span>
-                        </p>
+                        </h5>
                         <p>
                             Expenses:&nbsp;
                             <span className="badge badge-danger" data-toggle="tooltip" data-html="true" title="Hourly">

@@ -45,8 +45,8 @@ class Alert extends Component {
     render() {
         return (    
           <div className="alert alert-primary" role="alert">
-            <p>Runway: <span data-toggle="tooltip" data-html="true" title="Runway">{this.state.runway} Years</span></p>
-            <p>Est. Worth:&nbsp;
+            <p><strong>Runway:</strong> <span data-toggle="tooltip" data-html="true" title="Runway">{this.state.runway} Years</span></p>
+            <p><strong>Est. Worth:</strong>&nbsp;
               <span data-toggle="tooltip" data-html="true" title="@ 7% APR">
                 <NumberFormat value={this.state.estimated_worth} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
               </span></p>

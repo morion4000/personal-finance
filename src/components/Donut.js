@@ -60,8 +60,8 @@ class Donut extends Component {
               plotOptions: {
                 pie: {
                   colors: [
-                    'blue',
-                    'red'
+                    '#4582EC',
+                    '#d9534f'
                   ],
                   dataLabels: {
                     enabled: true,
