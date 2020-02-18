@@ -54,27 +54,40 @@ class Storage {
   }];
 
   static getItems(type = null) {
-      let items = localStorage.getItem(CONFIG.LOCALSTORAGE_KEY) || [];
+      let items = localStorage.getItem(CONFIG.LOCALSTORAGE_KEY);
+      let filtered_items = [];
+
+      if (items) {
+        items = JSON.parse(items);
+      } else {
+        items = [];
+      }      
 
       if (type) {
-        Storage.items.forEach(function(item) {
+        items.forEach(function(item) {
             if (item.type === type) {
-                items.push(item);
+              filtered_items.push(item);
             }
         });
       } else {
-          items = Storage.items;
+        filtered_items = items;
       }
     
-      return items;
+      return filtered_items;
   }
 
   static addItem(item) {
     let items = localStorage.getItem(CONFIG.LOCALSTORAGE_KEY);
 
+    if (items) {
+      items = JSON.parse(items);
+    } else {
+      items = [];
+    }
+
     items.push(item);
 
-    localStorage.setItem(CONFIG.LOCALSTORAGE_KEY, items);
+    localStorage.setItem(CONFIG.LOCALSTORAGE_KEY, JSON.stringify(items));
   }
 }
 

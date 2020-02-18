@@ -2,7 +2,6 @@
   "name": "personal-finance-website",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "https://www.morion4000.com/personal-finance",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",

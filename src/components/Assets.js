@@ -31,6 +31,7 @@ class Assets extends Component {
         Storage.addItem({
             type: Storage.TYPES.ASSET,
             name: this.state.name,
+            amount: this.state.principal,
             apr: this.state.apr,
             compounds: false
         });
@@ -44,7 +45,7 @@ class Assets extends Component {
           _this.props.items.map(function(item) {
             let accrued = item.accrued || 0;
     
-            accrued += item.amount * item.apr / 100 / CONFIG.MILISECONDS_IN_YEAR * CONFIG.REFRESH_INTERVAL;
+            accrued += parseInt(item.amount) * parseInt(item.apr) / 100 / CONFIG.MILISECONDS_IN_YEAR * CONFIG.REFRESH_INTERVAL;
     
             item.accrued = accrued;
             
@@ -65,7 +66,7 @@ class Assets extends Component {
         let total_apr = 0;
 
         this.props.items.forEach(function(asset) {
-            total_apr += asset.apr;
+            total_apr += parseInt(asset.apr);
         });
 
         return (total_apr / this.props.items.length).toFixed(1);
@@ -126,6 +127,16 @@ class Assets extends Component {
                                     value={this.state.name}
                                     onChange={this.handleInputChange} />
                                 <small>i.e. Bank deposit</small>
+                            </div>
+                            <div className="col">
+                                <input 
+                                    className="form-control form-control-lg"
+                                    type="text"
+                                    placeholder="principal"
+                                    name="principal"
+                                    value={this.state.principal}
+                                    onChange={this.handleInputChange} />
+                                <small>i.e. 1000</small>
                             </div>
                             <div className="col">
                                 <input
