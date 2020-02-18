@@ -9,7 +9,9 @@ class Expenses extends Component {
         super(props);
 
         this.state = {
-            accrued_sum: 0
+            accrued_sum: 0,
+            name: '',
+            expense: ''
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -83,7 +85,16 @@ class Expenses extends Component {
         return total_principal + this.state.accrued_sum;
     }
 
+    handleDelete(item) {
+        Storage.removeItem(item.id);
+
+        window.location.reload();
+    }
+
     render() {
+        const { name, expense } = this.state;
+        const valid = name.length > 0 && expense.length > 0;
+
         return (
             <React.Fragment>
                 <div className="row">
@@ -104,10 +115,9 @@ class Expenses extends Component {
 
                 <div className="row">
                   <div className="col-sm">
-                    <h5>New expense</h5>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-row form-group">
-                            <div className="col">
+                            <div className="col-6">
                                 <input 
                                     className="form-control form-control-lg"
                                     type="text"
@@ -117,10 +127,10 @@ class Expenses extends Component {
                                     onChange={this.handleInputChange} />
                                 <small>eg. Taxes</small>
                             </div>
-                            <div className="col">
+                            <div className="col-6">
                                 <input 
                                     className="form-control form-control-lg"
-                                    type="text"
+                                    type="number"
                                     placeholder="Monthly Expense"
                                     name="expense"
                                     value={this.state.expense}
@@ -132,7 +142,7 @@ class Expenses extends Component {
                             <div className="col">
                                 <button
                                     className="btn btn-block btn-danger btn-lg"
-                                    type="submit">Add expense</button>
+                                    disabled={!valid}>Add expense</button>
                             </div>
                         </div>    
                     </form>
@@ -155,6 +165,12 @@ class Expenses extends Component {
                                 <div className="form-label-group">
                                 <label for="gains" data-toggle="tooltip" data-html="true" title="">Debit</label>
                                     <input type="text" className="form-control" value={item.accrued} disabled />
+                                </div>
+                            </div>
+                            <div className="col-2">
+                                <div className="form-label-group">
+                                    <br />
+                                    <button className="btn btn-danger" onClick={this.handleDelete.bind(this, item)}>x</button>
                                 </div>
                             </div>
                         </div>

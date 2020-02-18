@@ -9,7 +9,9 @@ class Storage {
         items = JSON.parse(items);
       } catch(e) {
         items = [];
-      }  
+      }
+
+      items = items || [];
 
       items.forEach(function(item) {
         item.amount = parseInt(item.amount);
@@ -27,18 +29,28 @@ class Storage {
       return filtered_items;
   }
 
-  static addItem(item) {
-    let items = localStorage.getItem(CONFIG.LOCALSTORAGE_KEY);
+  static setItems(items) {
+    localStorage.setItem(CONFIG.LOCALSTORAGE_KEY, JSON.stringify(items));
+  }
 
-    try {
-      items = JSON.parse(items);
-    } catch(e) {
-      items = [];
-    }
+  static addItem(item) {
+    let items = Storage.getItems();
 
     items.push(item);
 
-    localStorage.setItem(CONFIG.LOCALSTORAGE_KEY, JSON.stringify(items));
+    Storage.setItems(items);
+  }
+
+  static removeItem(id) {
+    let items = Storage.getItems();
+
+    const index = items.findIndex(item => item.id === id);
+
+    if (index >= 0) {
+      items.splice(index, 1);
+    }
+
+    Storage.setItems(items);
   }
 }
 

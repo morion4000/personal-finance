@@ -8,6 +8,7 @@ import Expenses from '../components/Expenses';
 import Sankey from '../components/Sankey';
 import Donut from '../components/Donut';
 import Alert from '../components/Alert';
+import Announcement from '../components/Announcement';
 import Storage from '../components/Storage';
 
 import CONFIG from '../config';
@@ -31,7 +32,7 @@ class Home extends Component {
     return (
       <div>
         <Header items={this.state.all_items}>
-          <Donut items={this.state.all_items} />
+          {this.state.all_items.length > 0 && <Donut items={this.state.all_items} />}
         </Header>
 
         <div className="container">
@@ -54,10 +55,11 @@ class Home extends Component {
           </div>
 
           <br />
+          <br />
 
           <div className="row">
             <div className="col-sm">
-              <Sankey items={this.state.all_items} />
+              {this.state.all_items.length > 0 && <Sankey items={this.state.all_items} />}
             </div>
           </div>
         </div>

@@ -65,7 +65,7 @@ class Header extends Component {
                         <button type="button" className="btn btn-primary btn-lg">
                             Streaming&nbsp;&nbsp;
                             <span className="badge badge-light">
-                                <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={4} />
+                                <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={6} />
                             </span>
                         </button>
                         <br /><br />

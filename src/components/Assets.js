@@ -9,7 +9,10 @@ class Assets extends Component {
         super(props);
 
         this.state = {
-            accrued_sum: 0
+            accrued_sum: 0,
+            name: '',
+            principal: '',
+            apr: ''
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -47,6 +50,12 @@ class Assets extends Component {
         window.location.reload();
     }
 
+    handleDelete(item) {
+        Storage.removeItem(item.id);
+
+        window.location.reload();
+    }
+
     componentDidMount() {
         const _this = this;
     
@@ -80,7 +89,10 @@ class Assets extends Component {
             total_apr += asset.apr;
         });
 
-        return (total_apr / this.props.items.length).toFixed(1);
+        total_apr /= this.props.items.length;
+        total_apr = total_apr || 0;
+
+        return total_apr.toFixed(1);
     }
 
     getAssetsTotalPrincipal() {
@@ -94,14 +106,19 @@ class Assets extends Component {
     }
 
     render() {
+        const { name, principal, apr } = this.state;
+        const valid = name.length > 0 && principal.length > 0 && apr.length > 0;
+
         return (
             <React.Fragment>
                 <div className="row">
                   <div className="col-sm">
                     <h3>Savings <span className="badge badge-secondary">{this.getAssetsTotalApr()}%</span></h3>
-                    <h5><NumberFormat value={this.getAssetsTotalPrincipal()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={3} /></h5>
+                    <h5>
+                        <NumberFormat value={this.getAssetsTotalPrincipal()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={3} />
+                    </h5>
                     <span data-toggle="tooltip" data-html="true" title="Computing...">
-                    <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
+                        <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
                     </span>
                   </div>
                 </div>
@@ -110,10 +127,9 @@ class Assets extends Component {
 
                 <div className="row">
                   <div className="col-sm">
-                    <h5>New asset</h5>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-row form-group">
-                            <div className="col">
+                            <div className="col-5">
                                 <input 
                                     className="form-control form-control-lg"
                                     type="text"
@@ -126,17 +142,19 @@ class Assets extends Component {
                             <div className="col">
                                 <input 
                                     className="form-control form-control-lg"
-                                    type="text"
+                                    type="number"
                                     placeholder="Principal"
                                     name="principal"
                                     value={this.state.principal}
                                     onChange={this.handleInputChange} />
                                 <small>eg. 1000</small>
                             </div>
-                            <div className="col">
+                            <div className="col-3">
                                 <input
                                     className="form-control form-control-lg"
-                                    type="text"
+                                    type="number"
+                                    min="0"
+                                    max="100"
                                     placeholder="APR"
                                     name="apr"
                                     value={this.state.apr}
@@ -148,7 +166,8 @@ class Assets extends Component {
                             <div className="col">
                                 <button
                                     className="btn btn-block btn-success btn-lg"
-                                    type="submit">Add asset</button>
+                                    type="submit"
+                                    disabled={!valid}>Add asset</button>
                             </div>
                         </div>    
                     </form>
@@ -169,8 +188,14 @@ class Assets extends Component {
                             </div>
                             <div className="col-sm">
                                 <div className="form-label-group">
-                                <label for="gains" data-toggle="tooltip" data-html="true" title="">APR {item.apr}%</label>
+                                    <label for="gains" data-toggle="tooltip" data-html="true" title="">APR {item.apr}%</label>
                                     <input type="text" className="form-control" value={item.accrued} disabled />
+                                </div>
+                            </div>
+                            <div className="col-2">
+                                <div className="form-label-group">
+                                    <br />
+                                    <button className="btn btn-danger" onClick={this.handleDelete.bind(this, item)}>x</button>
                                 </div>
                             </div>
                         </div>
