@@ -64,7 +64,7 @@ class Header extends Component {
                         <div className="col-5">
                         <h1 className="display-4">Personal Finance</h1>
                         <p className="lead">Visualise Money Streams</p>
-                        <button type="button" className={`btn btn-lg btn-block ${this.state.accrued_sum > 0 ? 'btn-primary' : 'btn-danger'}`}>
+                        <button type="button" className={`btn btn-lg btn-block ${this.state.accrued_sum >= 0 ? 'btn-primary' : 'btn-danger'}`}>
                             Streaming&nbsp;&nbsp;
                             <h5 style={{'color': 'rgb(177, 190, 212)'}}>
                                 <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={6} />
