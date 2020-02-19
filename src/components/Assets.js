@@ -84,12 +84,17 @@ class Assets extends Component {
 
     getTotalApr() {
         let total_apr = 0;
+        let generating_assets_count = 0;
 
         this.props.items.forEach(function(asset) {
+            if (asset.apr > 0) {
+                generating_assets_count++;
+            }
+
             total_apr += asset.apr;
         });
 
-        total_apr /= this.props.items.length;
+        total_apr /= generating_assets_count;
         total_apr = total_apr || 0;
 
         return total_apr.toFixed(1);
