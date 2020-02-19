@@ -4,7 +4,7 @@ import NumberFormat from 'react-number-format';
 import CONFIG from '../config';
 import Storage from './Storage';
 
-class Assets extends Component {
+class Services extends Component {
     constructor(props) {
         super(props);
 
@@ -109,7 +109,7 @@ class Assets extends Component {
             <React.Fragment>
                 <div className="row">
                   <div className="col-sm">
-                    <h3><strong>Services</strong></h3>
+                    <h3><strong>Income</strong></h3>
                     <h5>
                         Monthy credit: <NumberFormat value={this.getMonthlyCredit()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
                     </h5>
@@ -149,8 +149,8 @@ class Assets extends Component {
                         <div className="form-row form-group">
                             <div className="col">
                                 <button
-                                    className="btn btn-block btn-warning btn-lg"
-                                    disabled={!valid}>Add service</button>
+                                    className="btn btn-block btn-primary btn-lg"
+                                    disabled={!valid}>Add income</button>
                             </div>
                         </div>    
                     </form>
@@ -162,7 +162,7 @@ class Assets extends Component {
                 <table className="table table-hover align-items-center table-borderless">
                     <thead>
                         <tr>
-                            <th scope="col">Service</th>
+                            <th scope="col">Income</th>
                             <th scope="col">Credit</th>
                             <th scope="col">&nbsp;</th>
                         </tr>
@@ -193,4 +193,4 @@ class Assets extends Component {
 }
   
 
-export default Assets;
+export default Services;

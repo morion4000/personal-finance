@@ -20,22 +20,46 @@ class Home extends Component {
       all_items: Storage.getItems(),
       assets: Storage.getItems(CONFIG.ITEM_TYPE.ASSET),
       services: Storage.getItems(CONFIG.ITEM_TYPE.SERVICE),
-      expenses: Storage.getItems(CONFIG.ITEM_TYPE.EXPENSE)
+      expenses: Storage.getItems(CONFIG.ITEM_TYPE.EXPENSE),
+      sample: false
     }
+
+    this.loadSampleData = this.loadSampleData.bind(this);
   }
 
-  componentDidMount() {
+  loadSampleData() {
+    let all_items = [];
+
+    all_items = all_items.concat(CONFIG.SAMPLE_DATA.ASSETS, CONFIG.SAMPLE_DATA.SERVICES, CONFIG.SAMPLE_DATA.EXPENSES);
+    
+    this.setState({
+      sample: true,
+      all_items: all_items,
+      assets: CONFIG.SAMPLE_DATA.ASSETS,
+      services: CONFIG.SAMPLE_DATA.SERVICES,
+      expenses: CONFIG.SAMPLE_DATA.EXPENSES
+    });
   }
 
   render() {
     return (
       <div>
         <Header items={this.state.all_items}>
-          {this.state.all_items.length > 0 && <Donut items={this.state.all_items} />}
+          {this.state.all_items.length > 0 && !this.state.sample && <Donut items={this.state.all_items} />}
+          {this.state.sample && <Donut items={this.state.all_items} />}
         </Header>
 
         <div className="container">
-          <Alert items={this.state.all_items} />
+          <div className="row">
+              <div className="col">
+                  <center><button className="btn btn-sm btn-secondary" onClick={this.loadSampleData}>Load sample data</button></center>
+              </div>
+          </div>
+
+          <br />
+
+          {!this.state.sample && <Alert items={this.state.all_items} />}
+          {this.state.sample && <Alert items={this.state.all_items} />}
           
           <br />
 
@@ -58,7 +82,8 @@ class Home extends Component {
 
           <div className="row">
             <div className="col-sm">
-              {this.state.all_items.length > 0 && <Sankey items={this.state.all_items} />}
+              {this.state.all_items.length > 0 && !this.state.sample && <Sankey items={this.state.all_items} />}
+              {this.state.sample && <Sankey items={this.state.all_items} />}
             </div>
           </div>
         </div>
