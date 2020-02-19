@@ -13,9 +13,7 @@
     "react-ga": "^2.7.0",
     "react-number-format": "^4.3.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
-    "truffle-contract": "^4.0.31",
-    "web3": "^1.2.4"
+    "react-scripts": "3.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
