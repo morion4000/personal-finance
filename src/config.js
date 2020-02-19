@@ -10,21 +10,21 @@ const CONFIG = {
     },
     SAMPLE_DATA: {
         ASSETS: [{
-            id: 4433,
+            id: 47433,
             type: 'asset',
             name: 'Bank deposit',
             amount: 50000,
             apr: 4,
             compounds: true
         }, {
-            id: 7474,
+            id: 74674,
             type: 'asset',
             name: 'Cash',
             amount: 5000,
             apr: 0,
             compounds: false
         }, {
-            id: 2123,
+            id: 21623,
             type: 'asset',
             name: 'Crypto Staking',
             amount: 30000,
@@ -32,21 +32,21 @@ const CONFIG = {
             compounds: true
         }],
         SERVICES: [{
-            id: 3993,
+            id: 39493,
             type: 'service',
             name: 'Job',
             amount: 2500,
             apr: 0,
             compounds: false
         }, {
-            id: 1983,
+            id: 19883,
             type: 'service',
             name: 'Consulting',
             amount: 500,
             apr: 0,
             compounds: false
         }, {
-            id: 6474,
+            id: 64874,
             type: 'service',
             name: 'Maintenance contract',
             amount: 200,
@@ -54,28 +54,28 @@ const CONFIG = {
             compounds: false
         }],
         EXPENSES: [{
-            id: 1234,
+            id: 41234,
             type: 'expense',
             name: 'Food',
             amount: 500,
             apr: 0,
             compounds: false
         }, {
-            id: 3523,
+            id: 35523,
             type: 'expense',
             name: 'Car',
             amount: 100,
             apr: 0,
             compounds: false
         }, {
-            id: 1212,
+            id: 12212,
             type: 'expense',
             name: 'Rent',
             amount: 400,
             apr: 0,
             compounds: false
         }, {
-            id: 6436,
+            id: 63436,
             type: 'expense',
             name: 'Taxes',
             amount: 300,

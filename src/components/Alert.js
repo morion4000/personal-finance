@@ -13,7 +13,7 @@ class Alert extends Component {
       let monthly_revenue = 0;
       let runway = 0;
 
-      this.props.items.map(function(item) {
+      props.items.map(function(item) {
         let principal = 0;
 
         if (item.type === CONFIG.ITEM_TYPE.SERVICE) {

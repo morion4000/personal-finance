@@ -8,6 +8,7 @@ class Expenses extends Component {
     constructor(props) {
         super(props);
 
+        this.interval = null;
         this.state = {
             accrued_sum: 0,
             name: '',
@@ -57,7 +58,7 @@ class Expenses extends Component {
     componentDidMount() {
         const _this = this;
 
-        setInterval(function() {
+        this.interval = setInterval(function() {
           let accrued_sum = 0;
           
           _this.props.items.map(function(item) {
@@ -78,6 +79,12 @@ class Expenses extends Component {
 
           _this.forceUpdate();
         }, CONFIG.REFRESH_INTERVAL);
+    }
+
+    componentWillUnmount() {
+        if (this.interval) {
+            clearInterval(this.interval);
+        }
     }
 
     getTotalEstimatedPrincipal() {

@@ -7,33 +7,43 @@ class Header extends Component {
     constructor(props) {
         super(props);
 
+        let monthly_income = 0;
+        let monthly_expenses = 0;
+
+        props.items.map(function(item) {    
+            if (item.type === CONFIG.ITEM_TYPE.ASSET) {
+                monthly_income += item.amount * item.apr / 100 / 12;
+            } else if (item.type === CONFIG.ITEM_TYPE.SERVICE) {
+                monthly_income += item.amount;
+            } else {
+                monthly_expenses += item.amount;
+            }
+                
+            return item;
+        });
+
+        this.interval = null;
         this.state = {
             accrued_sum: 0,
-            monthly_income: 0,
-            monthly_expenses: 0
+            monthly_income: monthly_income,
+            monthly_expenses: monthly_expenses
         }
     }
 
     componentDidMount() {
         const _this = this;
-        
-        setInterval(function() {
-          let accrued_sum = 0;
-          let monthly_income = 0;
-          let monthly_expenses = 0;
+        let accrued_sum = 0;
 
+        this.interval = setInterval(function() {
           _this.props.items.map(function(item) {
-            let accrued = item.accrued || 0;
+            let accrued = 0;
     
             if (item.type === CONFIG.ITEM_TYPE.ASSET) {
                 accrued += item.amount * item.apr / 100 / CONFIG.MILISECONDS_IN_YEAR * CONFIG.REFRESH_INTERVAL;
-                monthly_income += item.amount * item.apr / 100 / 12;
             } else if (item.type === CONFIG.ITEM_TYPE.SERVICE) {
                 accrued += item.amount * 12 / CONFIG.MILISECONDS_IN_YEAR * CONFIG.REFRESH_INTERVAL;
-                monthly_income += item.amount;
             } else if (item.type === CONFIG.ITEM_TYPE.EXPENSE) {
                 accrued -= item.amount * 12 / CONFIG.MILISECONDS_IN_YEAR * CONFIG.REFRESH_INTERVAL;
-                monthly_expenses += item.amount;
             }
             
             accrued_sum += accrued;
@@ -42,11 +52,15 @@ class Header extends Component {
           });
 
           _this.setState({
-            accrued_sum: accrued_sum,
-            monthly_income: monthly_income,
-            monthly_expenses: monthly_expenses
+            accrued_sum: accrued_sum
           });
         }, CONFIG.REFRESH_INTERVAL);
+    }
+
+    componentWillUnmount() {
+        if (this.interval) {
+            clearInterval(this.interval);
+        }
     }
 
     render() {

@@ -44,10 +44,13 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Header items={this.state.all_items}>
-          {this.state.all_items.length > 0 && !this.state.sample && <Donut items={this.state.all_items} />}
-          {this.state.sample && <Donut items={this.state.all_items} />}
-        </Header>
+        {!this.state.sample && <Header items={this.state.all_items}>
+          {this.state.all_items.length > 0 && <Donut items={this.state.all_items} />}
+        </Header>}
+
+        {this.state.sample && <Header items={this.state.all_items}>
+          <Donut items={this.state.all_items} />
+        </Header>}
 
         <div className="container">
           <div className="row">
