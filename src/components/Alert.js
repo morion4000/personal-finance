@@ -51,7 +51,7 @@ class Alert extends Component {
         return (    
           <div className="alert alert-dark" role="alert">
             <p>
-              <strong>Runway:</strong> <span data-tip={`Yearly deficit: $${this.state.yearly_deficit}`}>
+              <strong>Runway:</strong> <span data-tip={`Yearly Deficit: $${this.state.yearly_deficit}`}>
                 {this.state.yearly_deficit > 0 && <span><NumberFormat value={this.state.runway} displayType={'text'} thousandSeparator={true} decimalScale={1} /> Years</span>}
                 {this.state.yearly_deficit === 0 && <span>&infin;</span>}
               </span>
