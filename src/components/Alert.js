@@ -24,13 +24,13 @@ class Alert extends Component {
         } else if (item.type === CONFIG.ITEM_TYPE.ASSET) {
             principal = item.amount;
 
+            estimated_worth += principal;
+
             monthly_revenue += item.amount * item.apr / 100 / 12;
             principal_sum += item.amount;
         } else if (item.type === CONFIG.ITEM_TYPE.EXPENSE) {
             expenses_sum += item.amount;
         }
-
-        estimated_worth += principal;
 
         return item;
       });
@@ -49,17 +49,20 @@ class Alert extends Component {
 
     render() {
         return (    
-          <div className="alert alert-dark" role="alert">
+          <div className="alert alert-secondary" role="alert">
             <p>
-              <strong>Runway:</strong> <span data-tip={`Yearly Deficit: $${this.state.yearly_deficit}`}>
+              <strong>Net Worth:</strong>&nbsp;
+              <span data-tip={`@ ${CONFIG.SERVICE_ESTIMATE_APR}% APR`}>
+                <NumberFormat value={this.state.estimated_worth} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+              </span>
+            </p>
+            <p>
+              <strong>Runway:</strong>&nbsp;
+              <span data-tip={`Yearly Deficit: $${this.state.yearly_deficit}`}>
                 {this.state.yearly_deficit > 0 && <span><NumberFormat value={this.state.runway} displayType={'text'} thousandSeparator={true} decimalScale={1} /> Years</span>}
                 {this.state.yearly_deficit === 0 && <span>&infin;</span>}
               </span>
             </p>
-            <p><strong>Est. Worth:</strong>&nbsp;
-              <span data-tip={`@ ${CONFIG.SERVICE_ESTIMATE_APR}% APR`}>
-                <NumberFormat value={this.state.estimated_worth} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
-              </span></p>
           </div>
         );
     }
