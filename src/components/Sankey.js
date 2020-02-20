@@ -27,17 +27,26 @@ class Sankey extends Component {
               const monthly_income = item.amount * item.apr / 100 / 12;
 
               assets_sum += parseInt(monthly_income);
-              data.push([item.name, 'Savings', parseInt(monthly_income)]);
+
+              if (monthly_income > 0) {
+                data.push([item.name, 'Savings', parseInt(monthly_income)]);
+              }
               break;
 
             case CONFIG.ITEM_TYPE.SERVICE:
               services_sum += item.amount;
-              data.push([item.name, 'Services', item.amount]);
+
+              if (item.amount > 0) {
+                data.push([item.name, 'Services', item.amount]);
+              }
               break;
 
             case CONFIG.ITEM_TYPE.EXPENSE:
               expenses_sum += item.amount;
-              data.push(['Expenses', item.name, item.amount]);
+
+              if (item.amount > 0) {
+                data.push(['Expenses', item.name, item.amount]);
+              }
               break;
 
             default:
