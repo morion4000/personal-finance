@@ -141,7 +141,7 @@ class Assets extends Component {
 
                 <div className="row">
                   <div className="col-sm">
-                    <h3><strong>Savings</strong> <span className="badge badge-secondary">{this.getTotalApr()}%</span></h3>
+                    <h3><strong>Assets</strong> <span className="badge badge-secondary">{this.getTotalApr()}%</span></h3>
                     <span data-tip data-for="assets_credit_tooltip">
                         Credit: <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
                     </span>
@@ -184,7 +184,7 @@ class Assets extends Component {
                                     name="principal"
                                     value={this.state.principal}
                                     onChange={this.handleInputChange} />
-                                <small>eg. 1000</small>
+                                <small>eg. $1000</small>
                             </div>
                             <div className="col-3">
                                 <input
@@ -196,7 +196,7 @@ class Assets extends Component {
                                     name="apr"
                                     value={this.state.apr}
                                     onChange={this.handleInputChange} />
-                                <small>eg. 4</small>
+                                <small>eg. 4%</small>
                             </div>
                         </div>
                         <div className="form-row form-group">

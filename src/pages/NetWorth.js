@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-import Sankey from '../components/Sankey';
+import Alert from '../components/Alert';
 import Storage from '../components/Storage';
 
 import CONFIG from '../config';
 
-class MoneyFlow extends Component {
+class NetWorth extends Component {
   constructor(props) {
     super(props);
 
@@ -48,16 +48,12 @@ class MoneyFlow extends Component {
 
           <br />
 
-          <div className="row">
-            <div className="col-sm">
-              {this.state.all_items.length > 0 && !this.state.sample && <Sankey items={this.state.all_items} />}
-              {this.state.sample && <Sankey items={this.state.all_items} />}
-            </div>
-          </div>
+          {!this.state.sample && <Alert items={this.state.all_items} />}
+          {this.state.sample && <Alert items={this.state.all_items} />}
         </div>
       </React.Fragment>
     );
   }
 }
 
-export default MoneyFlow;
+export default NetWorth;

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-import Alert from '../components/Alert';
+import Sankey from '../components/Sankey';
 import Storage from '../components/Storage';
 
 import CONFIG from '../config';
 
-class EstimatedWorth extends Component {
+class CashFlow extends Component {
   constructor(props) {
     super(props);
 
@@ -48,12 +48,16 @@ class EstimatedWorth extends Component {
 
           <br />
 
-          {!this.state.sample && <Alert items={this.state.all_items} />}
-          {this.state.sample && <Alert items={this.state.all_items} />}
+          <div className="row">
+            <div className="col-sm">
+              {this.state.all_items.length > 0 && !this.state.sample && <Sankey items={this.state.all_items} />}
+              {this.state.sample && <Sankey items={this.state.all_items} />}
+            </div>
+          </div>
         </div>
       </React.Fragment>
     );
   }
 }
 
-export default EstimatedWorth;
+export default CashFlow;

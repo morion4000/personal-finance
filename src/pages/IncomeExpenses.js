@@ -7,7 +7,7 @@ import Storage from '../components/Storage';
 
 import CONFIG from '../config';
 
-class Income extends Component {
+class IncomeExpenses extends Component {
   constructor(props) {
     super(props);
 
@@ -69,4 +69,4 @@ class Income extends Component {
   }
 }
 
-export default Income;
+export default IncomeExpenses;

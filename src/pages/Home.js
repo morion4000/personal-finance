@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip';
 
-import MoneyFlow from './MoneyFlow';
-import Income from './Income';
-import EstimatedWorth from './EstimatedWorth';
+import CashFlow from './CashFlow';
+import IncomeExpenses from './IncomeExpenses';
+import NetWorth from './NetWorth';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -22,7 +22,7 @@ class Home extends Component {
       services: Storage.getItems(CONFIG.ITEM_TYPE.SERVICE),
       expenses: Storage.getItems(CONFIG.ITEM_TYPE.EXPENSE),
       sample: false,
-      active_tab: 'income'
+      active_tab: 'incomeexpenses'
     }
 
     this.loadSampleData = this.loadSampleData.bind(this);
@@ -67,13 +67,13 @@ class Home extends Component {
                     <div className="col">
                         <ul className="nav nav-tabs" role="tablist">
                             <li className="nav-item">
-                                <a className="nav-link active" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'income')}>Income &amp; Expenses</a>
+                                <a className="nav-link active" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'incomeexpenses')}>Income &amp; Expenses</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'moneyflow')}>Cash Flow</a>
+                                <a className="nav-link" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'cashflow')}>Cash Flow</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'estimatedworth')}>Net Worth</a>
+                                <a className="nav-link" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'networth')}>Net Worth</a>
                             </li>
                         </ul>
                     </div>
@@ -83,9 +83,9 @@ class Home extends Component {
 
         <br />
 
-        {this.state.active_tab === 'income' && <Income />}
-        {this.state.active_tab === 'moneyflow' && <MoneyFlow />}
-        {this.state.active_tab === 'estimatedworth' && <EstimatedWorth />}
+        {this.state.active_tab === 'incomeexpenses' && <IncomeExpenses />}
+        {this.state.active_tab === 'cashflow' && <CashFlow />}
+        {this.state.active_tab === 'networth' && <NetWorth />}
 
         <Footer />
       </React.Fragment>

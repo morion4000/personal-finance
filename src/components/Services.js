@@ -175,7 +175,7 @@ class Services extends Component {
                                     name="income"
                                     value={this.state.income}
                                     onChange={this.handleInputChange} />
-                                <small>eg. 1000</small>
+                                <small>eg. $1000</small>
                             </div>
                         </div>
                         <div className="form-row form-group">

@@ -175,7 +175,7 @@ class Expenses extends Component {
                                     name="expense"
                                     value={this.state.expense}
                                     onChange={this.handleInputChange} />
-                                <small>eg. 1000</small>
+                                <small>eg. $1000</small>
                             </div>
                         </div>
                         <div className="form-row form-group">
