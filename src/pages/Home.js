@@ -67,13 +67,13 @@ class Home extends Component {
                     <div className="col">
                         <ul className="nav nav-tabs" role="tablist">
                             <li className="nav-item">
-                                <a className="nav-link active" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'income')}>Income</a>
+                                <a className="nav-link active" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'income')}>Income &amp; Expenses</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'moneyflow')}>Money Flow</a>
+                                <a className="nav-link" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'moneyflow')}>Cash Flow</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'estimatedworth')}>Estimated Worth</a>
+                                <a className="nav-link" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'estimatedworth')}>Net Worth</a>
                             </li>
                         </ul>
                     </div>
