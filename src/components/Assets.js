@@ -14,11 +14,13 @@ class Assets extends Component {
             accrued_sum: 0,
             name: '',
             principal: '',
-            apr: ''
+            apr: '',
+            show_add_form: false
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.showAddForm = this.showAddForm.bind(this);
     }
 
     handleInputChange(event) {
@@ -56,6 +58,12 @@ class Assets extends Component {
         Storage.removeItem(item.id);
 
         window.location.reload();
+    }
+
+    showAddForm() {
+        this.setState({
+            show_add_form: true
+        });
     }
 
     componentDidMount() {
@@ -142,7 +150,17 @@ class Assets extends Component {
 
                 <hr />
 
-                <div className="row">
+                <div className="row" style={{display: this.state.show_add_form ? 'none' : 'block'}}>
+                  <div className="col">
+                      <center>
+                    <button
+                        className="btn btn-primary btn-lg"
+                        onClick={this.showAddForm}>+</button>
+                        </center>
+                  </div>
+                </div>
+
+                <div className="row" style={{display: this.state.show_add_form ? 'block' : 'none'}}>
                   <div className="col-sm">
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-row form-group">
@@ -182,7 +200,7 @@ class Assets extends Component {
                         <div className="form-row form-group">
                             <div className="col">
                                 <button
-                                    className="btn btn-block btn-success btn-lg"
+                                    className="btn btn-block btn-primary btn-lg"
                                     type="submit"
                                     disabled={!valid}>Add asset</button>
                             </div>

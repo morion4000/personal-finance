@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip';
 
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Assets from '../components/Assets';
-import Services from '../components/Services';
-import Expenses from '../components/Expenses';
-import Donut from '../components/Donut';
 import Alert from '../components/Alert';
+import Footer from '../components/Footer';
 import Storage from '../components/Storage';
 
 import CONFIG from '../config';
 
-class Home extends Component {
+class EstimatedWorth extends Component {
   constructor(props) {
     super(props);
 
@@ -46,13 +41,7 @@ class Home extends Component {
       <React.Fragment>
         <ReactTooltip effect="solid" />
 
-        {!this.state.sample && <Header items={this.state.all_items}>
-          {this.state.all_items.length > 0 && <Donut items={this.state.all_items} />}
-        </Header>}
-
-        {this.state.sample && <Header items={this.state.all_items}>
-          <Donut items={this.state.all_items} />
-        </Header>}
+        <br />
 
         <div className="container">
           <div className="row">
@@ -63,19 +52,8 @@ class Home extends Component {
 
           <br />
 
-          <div className="row">
-            <div className="col-sm">
-              <Assets items={this.state.assets} />
-            </div>
-
-            <div className="col-sm">
-              <Services items={this.state.services} />
-            </div>
-
-            <div className="col-sm">
-              <Expenses items={this.state.expenses} />
-            </div>
-          </div>
+          {!this.state.sample && <Alert items={this.state.all_items} />}
+          {this.state.sample && <Alert items={this.state.all_items} />}
         </div>
 
         <Footer />
@@ -84,4 +62,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default EstimatedWorth;

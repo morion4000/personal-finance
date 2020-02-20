@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip';
 
-import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Assets from '../components/Assets';
-import Services from '../components/Services';
-import Expenses from '../components/Expenses';
-import Donut from '../components/Donut';
-import Alert from '../components/Alert';
+import Sankey from '../components/Sankey';
 import Storage from '../components/Storage';
 
 import CONFIG from '../config';
 
-class Home extends Component {
+class MoneyFlow extends Component {
   constructor(props) {
     super(props);
 
@@ -44,20 +39,14 @@ class Home extends Component {
   render() {
     return (
       <React.Fragment>
-        <ReactTooltip effect="solid" />
+        <ReactTooltip effect="solid" place="bottom" />
 
-        {!this.state.sample && <Header items={this.state.all_items}>
-          {this.state.all_items.length > 0 && <Donut items={this.state.all_items} />}
-        </Header>}
-
-        {this.state.sample && <Header items={this.state.all_items}>
-          <Donut items={this.state.all_items} />
-        </Header>}
+        <br />
 
         <div className="container">
           <div className="row">
               <div className="col">
-                  <center><button className="btn btn-sm btn-secondary" onClick={this.loadSampleData} data-tip="Temporarily load sample data. Refresh page to reset.">Load sample data</button></center>
+                  <center><button className="btn btn-sm btn-secondary" onClick={this.loadSampleData} data-tip="Overwrites current data. Refresh page to discard sample data.">Load sample data</button></center>
               </div>
           </div>
 
@@ -65,15 +54,8 @@ class Home extends Component {
 
           <div className="row">
             <div className="col-sm">
-              <Assets items={this.state.assets} />
-            </div>
-
-            <div className="col-sm">
-              <Services items={this.state.services} />
-            </div>
-
-            <div className="col-sm">
-              <Expenses items={this.state.expenses} />
+              {this.state.all_items.length > 0 && !this.state.sample && <Sankey items={this.state.all_items} />}
+              {this.state.sample && <Sankey items={this.state.all_items} />}
             </div>
           </div>
         </div>
@@ -84,4 +66,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default MoneyFlow;

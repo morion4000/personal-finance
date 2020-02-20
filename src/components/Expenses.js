@@ -13,11 +13,13 @@ class Expenses extends Component {
         this.state = {
             accrued_sum: 0,
             name: '',
-            expense: ''
+            expense: '',
+            show_add_form: false
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.showAddForm = this.showAddForm.bind(this);
     }
 
     handleInputChange(event) {
@@ -54,6 +56,12 @@ class Expenses extends Component {
         Storage.removeItem(item.id);
 
         window.location.reload();
+    }
+
+    showAddForm() {
+        this.setState({
+            show_add_form: true
+        });
     }
 
     componentDidMount() {
@@ -133,7 +141,17 @@ class Expenses extends Component {
 
                 <hr />
 
-                <div className="row">
+                <div className="row" style={{display: this.state.show_add_form ? 'none' : 'block'}}>
+                  <div className="col">
+                      <center>
+                    <button
+                        className="btn btn-danger btn-lg"
+                        onClick={this.showAddForm}>+</button>
+                        </center>
+                  </div>
+                </div>
+
+                <div className="row" style={{display: this.state.show_add_form ? 'block' : 'none'}}>
                   <div className="col-sm">
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-row form-group">

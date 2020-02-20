@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Menu extends Component {
     render() {
@@ -16,11 +17,16 @@ class Menu extends Component {
                             <div className="collapse navbar-collapse justify-content-between" id="navbarNav">
                                 <ul className="navbar-nav">
                                     <li className="nav-item">
-                                        <a href="#income" className="nav-link active">Income</a>
+                                        <Link to="/" className="nav-link">Dashboard</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <a href="#moneyflow" className="nav-link">Money Flow</a>
+                                        <Link to="/moneyflow" className="nav-link">Money Flow</Link>
                                     </li>
+                                    {/*
+                                    <li className="nav-item">
+                                        <Link to="/estimatedworth" className="nav-link">Estimated Worth</Link>
+                                    </li>
+                                    */}
                                     {/*
                                     <li className="nav-item dropdown">
                                         <a className="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown">Pages</a>
