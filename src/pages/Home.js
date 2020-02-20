@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip';
 
+import Menu from '../components/Menu';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Assets from '../components/Assets';
@@ -44,7 +45,9 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
+        <Menu />
+
         <ReactTooltip effect="solid" />
 
         {!this.state.sample && <Header items={this.state.all_items}>
@@ -56,7 +59,7 @@ class Home extends Component {
         </Header>}
 
         <div className="container">
-          <div className="row">
+          <div className="row" id="income">
               <div className="col">
                   <center><button className="btn btn-sm btn-secondary" onClick={this.loadSampleData} data-tip="Temporarily load sample data. Refresh page to reset.">Load sample data</button></center>
               </div>
@@ -86,7 +89,7 @@ class Home extends Component {
           <br />
           <br />
 
-          <div className="row">
+          <div className="row" id="moneyflow">
             <div className="col-sm">
               {this.state.all_items.length > 0 && !this.state.sample && <Sankey items={this.state.all_items} />}
               {this.state.sample && <Sankey items={this.state.all_items} />}
@@ -94,8 +97,12 @@ class Home extends Component {
           </div>
         </div>
 
+        <br />
+
         <Footer />
-      </div>
+
+        <br />
+      </React.Fragment>
     );
   }
 }

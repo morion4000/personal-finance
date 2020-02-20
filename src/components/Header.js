@@ -90,7 +90,7 @@ class Header extends Component {
                                     <NumberFormat value={this.state.monthly_income / 30} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={1} />
                                 </span> /&nbsp;
                                 <span className="badge badge-primary" data-tip="Monthly">
-                                    <NumberFormat value={this.state.monthly_income} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                                    <strong><NumberFormat value={this.state.monthly_income} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} /></strong>
                                 </span> /&nbsp;
                                 <span className="badge badge-primary" data-tip="Yearly">
                                     <NumberFormat value={this.state.monthly_income * 12} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
@@ -105,7 +105,7 @@ class Header extends Component {
                                     <NumberFormat value={this.state.monthly_expenses / 30} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={1} />
                                 </span> /&nbsp;
                                 <span className="badge badge-danger" data-tip="Monthly">
-                                    <NumberFormat value={this.state.monthly_expenses} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                                    <strong><NumberFormat value={this.state.monthly_expenses} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} /></strong>
                                 </span> /&nbsp;
                                 <span className="badge badge-danger" data-tip="Yearly">
                                     <NumberFormat value={this.state.monthly_expenses * 12} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
