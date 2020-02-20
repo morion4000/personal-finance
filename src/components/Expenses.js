@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NumberFormat from 'react-number-format';
+import ReactTooltip from 'react-tooltip';
 
 import CONFIG from '../config';
 import Storage from './Storage';
@@ -114,13 +115,17 @@ class Expenses extends Component {
 
         return (
             <React.Fragment>
+                <ReactTooltip id="expenses_debit_tooltip" effect="solid">
+                    Hourly: <NumberFormat value={this.getMonthlyDebit() / 30 / 24} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} /><br />
+                    Daily: <NumberFormat value={this.getMonthlyDebit() / 30} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={1} /><br />
+                    <strong>Monthly: <NumberFormat value={this.getMonthlyDebit()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} /></strong><br />
+                    Yearly: <NumberFormat value={this.getMonthlyDebit() * 12} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                </ReactTooltip>
+
                 <div className="row">
                   <div className="col-sm">
                     <h3><strong>Expenses</strong></h3>
-                    <h5>
-                        Monthly debit: <NumberFormat value={this.getMonthlyDebit()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
-                    </h5>
-                    <span data-toggle="tooltip" data-html="true" title="Computing...">
+                    <span data-tip data-for="expenses_debit_tooltip">
                         Debit: <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
                     </span>
                   </div>

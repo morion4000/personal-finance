@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NumberFormat from 'react-number-format';
+import ReactTooltip from 'react-tooltip';
 
 import CONFIG from '../config';
 import Storage from './Storage';
@@ -123,13 +124,17 @@ class Assets extends Component {
 
         return (
             <React.Fragment>
+                <ReactTooltip id="assets_credit_tooltip" effect="solid">
+                    Hourly: <NumberFormat value={this.getMonthlyCredit() / 30 / 24} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} /><br />
+                    Daily: <NumberFormat value={this.getMonthlyCredit() / 30} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={1} /><br />
+                    <strong>Monthly: <NumberFormat value={this.getMonthlyCredit()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} /></strong><br />
+                    Yearly: <NumberFormat value={this.getMonthlyCredit() * 12} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                </ReactTooltip>
+
                 <div className="row">
                   <div className="col-sm">
                     <h3><strong>Savings</strong> <span className="badge badge-secondary">{this.getTotalApr()}%</span></h3>
-                    <h5>
-                        Monthly credit: <NumberFormat value={this.getMonthlyCredit()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
-                    </h5>
-                    <span data-toggle="tooltip" data-html="true" title="Computing...">
+                    <span data-tip data-for="assets_credit_tooltip">
                         Credit: <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
                     </span>
                   </div>
@@ -204,7 +209,7 @@ class Assets extends Component {
                                     <NumberFormat value={item.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
                                 </th>
                                 <td>
-                                    <label data-toggle="tooltip" data-html="true" title="">APR {item.apr}%</label>
+                                    <label data-tip="">APR {item.apr}%</label>
                                     <input type="text" className="form-control" defaultValue={item.accrued} disabled />
                                 </td>
                                 <td>

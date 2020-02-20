@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactTooltip from 'react-tooltip';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -44,6 +45,8 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <ReactTooltip effect="solid" />
+
         {!this.state.sample && <Header items={this.state.all_items}>
           {this.state.all_items.length > 0 && <Donut items={this.state.all_items} />}
         </Header>}
@@ -55,7 +58,7 @@ class Home extends Component {
         <div className="container">
           <div className="row">
               <div className="col">
-                  <center><button className="btn btn-sm btn-secondary" onClick={this.loadSampleData}>Load sample data</button></center>
+                  <center><button className="btn btn-sm btn-secondary" onClick={this.loadSampleData} data-tip="Temporarily load sample data. Refresh page to reset.">Load sample data</button></center>
               </div>
           </div>
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NumberFormat from 'react-number-format';
+import ReactTooltip from 'react-tooltip';
 
 import CONFIG from '../config';
 
@@ -68,6 +69,8 @@ class Header extends Component {
             <div className="jumbotron jumbotron-fluid">
                 <div className="container">
                     <div className="row">
+                        <ReactTooltip effect="solid" />
+                        
                         <div className="col-5">
                             <h1 className="display-4">Personal Finance</h1>
                             <p className="lead">Visualise Money Streams</p>
@@ -80,31 +83,31 @@ class Header extends Component {
                             <br /><br />
                             <h5>
                                 <strong>Total Income:</strong>&nbsp;
-                                <span className="badge badge-primary" data-toggle="tooltip" data-html="true" title="Hourly">
+                                <span className="badge badge-primary" data-tip="Hourly">
                                     <NumberFormat value={this.state.monthly_income / 30 / 24} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} />
                                 </span> /&nbsp;
-                                <span className="badge badge-primary" data-toggle="tooltip" data-html="true" title="Daily">
+                                <span className="badge badge-primary" data-tip="Daily">
                                     <NumberFormat value={this.state.monthly_income / 30} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={1} />
                                 </span> /&nbsp;
-                                <span className="badge badge-primary" data-toggle="tooltip" data-html="true" title="Monthly">
+                                <span className="badge badge-primary" data-tip="Monthly">
                                     <NumberFormat value={this.state.monthly_income} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
                                 </span> /&nbsp;
-                                <span className="badge badge-primary" data-toggle="tooltip" data-html="true" title="Yearly">
+                                <span className="badge badge-primary" data-tip="Yearly">
                                     <NumberFormat value={this.state.monthly_income * 12} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
                                 </span>
                             </h5>
                             <p>
                                 <strong>Expenses:</strong>&nbsp;
-                                <span className="badge badge-danger" data-toggle="tooltip" data-html="true" title="Hourly">
+                                <span className="badge badge-danger" data-tip="Hourly">
                                     <NumberFormat value={this.state.monthly_expenses / 30 / 24} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} />
                                 </span> /&nbsp;
-                                <span className="badge badge-danger" data-toggle="tooltip" data-html="true" title="Daily">
+                                <span className="badge badge-danger" data-tip="Daily">
                                     <NumberFormat value={this.state.monthly_expenses / 30} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={1} />
                                 </span> /&nbsp;
-                                <span className="badge badge-danger" data-toggle="tooltip" data-html="true" title="Monthly">
+                                <span className="badge badge-danger" data-tip="Monthly">
                                     <NumberFormat value={this.state.monthly_expenses} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
                                 </span> /&nbsp;
-                                <span className="badge badge-danger" data-toggle="tooltip" data-html="true" title="Yearly">
+                                <span className="badge badge-danger" data-tip="Yearly">
                                     <NumberFormat value={this.state.monthly_expenses * 12} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
                                 </span>
                             </p>

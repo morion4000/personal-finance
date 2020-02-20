@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NumberFormat from 'react-number-format';
+import ReactTooltip from 'react-tooltip';
 
 import CONFIG from '../config';
 import Storage from './Storage';
@@ -114,13 +115,17 @@ class Services extends Component {
 
         return (
             <React.Fragment>
+                <ReactTooltip id="services_credit_tooltip" effect="solid">
+                    Hourly: <NumberFormat value={this.getMonthlyCredit() / 30 / 24} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} /><br />
+                    Daily: <NumberFormat value={this.getMonthlyCredit() / 30} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={1} /><br />
+                    <strong>Monthly: <NumberFormat value={this.getMonthlyCredit()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} /></strong><br />
+                    Yearly: <NumberFormat value={this.getMonthlyCredit() * 12} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                </ReactTooltip>
+
                 <div className="row">
                   <div className="col-sm">
                     <h3><strong>Income</strong></h3>
-                    <h5>
-                        Monthy credit: <NumberFormat value={this.getMonthlyCredit()} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
-                    </h5>
-                    <span data-toggle="tooltip" data-html="true" title="Computing...">
+                    <span data-tip data-for="services_credit_tooltip">
                         Credit: <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
                     </span>
                   </div>
