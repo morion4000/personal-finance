@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 
-import Assets from '../components/Assets';
-import Services from '../components/Services';
-import Expenses from '../components/Expenses';
-import Storage from '../components/Storage';
+import Alert from '../../components/Alert';
+import Storage from '../../components/Storage';
 
-import CONFIG from '../config';
+import CONFIG from '../../config';
 
-class IncomeExpenses extends Component {
+class NetWorth extends Component {
   constructor(props) {
     super(props);
 
@@ -50,23 +48,12 @@ class IncomeExpenses extends Component {
 
           <br />
 
-          <div className="row">
-            <div className="col-sm">
-              <Assets items={this.state.assets} />
-            </div>
-
-            <div className="col-sm">
-              <Services items={this.state.services} />
-            </div>
-
-            <div className="col-sm">
-              <Expenses items={this.state.expenses} />
-            </div>
-          </div>
+          {!this.state.sample && <Alert items={this.state.all_items} />}
+          {this.state.sample && <Alert items={this.state.all_items} />}
         </div>
       </React.Fragment>
     );
   }
 }
 
-export default IncomeExpenses;
+export default NetWorth;

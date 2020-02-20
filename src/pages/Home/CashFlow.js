@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import Sankey from '../components/Sankey';
-import Storage from '../components/Storage';
+import Sankey from '../../components/Sankey';
+import Storage from '../../components/Storage';
 
-import CONFIG from '../config';
+import CONFIG from '../../config';
 
 class CashFlow extends Component {
   constructor(props) {

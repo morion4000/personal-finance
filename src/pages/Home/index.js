@@ -5,12 +5,12 @@ import CashFlow from './CashFlow';
 import IncomeExpenses from './IncomeExpenses';
 import NetWorth from './NetWorth';
 
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Donut from '../components/Donut';
-import Storage from '../components/Storage';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import Donut from '../../components/Donut';
+import Storage from '../../components/Storage';
 
-import CONFIG from '../config';
+import CONFIG from '../../config';
 
 class Home extends Component {
   constructor(props) {
