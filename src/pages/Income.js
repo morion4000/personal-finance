@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 
-import Sankey from '../components/Sankey';
+import Assets from '../components/Assets';
+import Services from '../components/Services';
+import Expenses from '../components/Expenses';
 import Storage from '../components/Storage';
 
 import CONFIG from '../config';
 
-class MoneyFlow extends Component {
+class Income extends Component {
   constructor(props) {
     super(props);
 
@@ -50,8 +52,15 @@ class MoneyFlow extends Component {
 
           <div className="row">
             <div className="col-sm">
-              {this.state.all_items.length > 0 && !this.state.sample && <Sankey items={this.state.all_items} />}
-              {this.state.sample && <Sankey items={this.state.all_items} />}
+              <Assets items={this.state.assets} />
+            </div>
+
+            <div className="col-sm">
+              <Services items={this.state.services} />
+            </div>
+
+            <div className="col-sm">
+              <Expenses items={this.state.expenses} />
             </div>
           </div>
         </div>
@@ -60,4 +69,4 @@ class MoneyFlow extends Component {
   }
 }
 
-export default MoneyFlow;
+export default Income;

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip';
 
+import MoneyFlow from './MoneyFlow';
+import Income from './Income';
+import EstimatedWorth from './EstimatedWorth';
+
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Assets from '../components/Assets';
-import Services from '../components/Services';
-import Expenses from '../components/Expenses';
 import Donut from '../components/Donut';
-import Alert from '../components/Alert';
 import Storage from '../components/Storage';
 
 import CONFIG from '../config';
@@ -21,7 +21,8 @@ class Home extends Component {
       assets: Storage.getItems(CONFIG.ITEM_TYPE.ASSET),
       services: Storage.getItems(CONFIG.ITEM_TYPE.SERVICE),
       expenses: Storage.getItems(CONFIG.ITEM_TYPE.EXPENSE),
-      sample: false
+      sample: false,
+      active_tab: 'income'
     }
 
     this.loadSampleData = this.loadSampleData.bind(this);
@@ -41,6 +42,12 @@ class Home extends Component {
     });
   }
 
+  changeTab = (tab) => {
+    this.setState({
+      active_tab: tab
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -54,29 +61,31 @@ class Home extends Component {
           <Donut items={this.state.all_items} />
         </Header>}
 
-        <div className="container">
-          <div className="row">
-              <div className="col">
-                  <center><button className="btn btn-sm btn-secondary" onClick={this.loadSampleData} data-tip="Temporarily load sample data. Refresh page to reset.">Load sample data</button></center>
-              </div>
-          </div>
-
-          <br />
-
-          <div className="row">
-            <div className="col-sm">
-              <Assets items={this.state.assets} />
+        <div className="bg-white" style={{marginTop: '-50px'}}>
+            <div className="container">
+                <div className="row">
+                    <div className="col">
+                        <ul className="nav nav-tabs" role="tablist">
+                            <li className="nav-item">
+                                <a className="nav-link active" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'income')}>Income</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'moneyflow')}>Money Flow</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'estimatedworth')}>Estimated Worth</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-
-            <div className="col-sm">
-              <Services items={this.state.services} />
-            </div>
-
-            <div className="col-sm">
-              <Expenses items={this.state.expenses} />
-            </div>
-          </div>
         </div>
+
+        <br />
+
+        {this.state.active_tab === 'income' && <Income />}
+        {this.state.active_tab === 'moneyflow' && <MoneyFlow />}
+        {this.state.active_tab === 'estimatedworth' && <EstimatedWorth />}
 
         <Footer />
       </React.Fragment>

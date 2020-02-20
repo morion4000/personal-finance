@@ -77,7 +77,7 @@ class Sankey extends Component {
             backgroundColor: 'transparent'
           },
           title: {
-            text: 'Money Flow'
+            text: 'Sankey Diagram'
           },
           series: [{
             keys: ['from', 'to', 'weight'],

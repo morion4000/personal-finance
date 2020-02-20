@@ -153,10 +153,12 @@ class Assets extends Component {
                 <div className="row" style={{display: this.state.show_add_form ? 'none' : 'block'}}>
                   <div className="col">
                       <center>
-                    <button
-                        className="btn btn-primary btn-lg"
-                        onClick={this.showAddForm}>+</button>
-                        </center>
+                        <button
+                            className="btn btn-primary btn-lg"
+                            onClick={this.showAddForm}>
+                                <i className="icon-circle-with-plus" />
+                            </button>
+                      </center>
                   </div>
                 </div>
 
@@ -231,7 +233,9 @@ class Assets extends Component {
                                     <input type="text" className="form-control" defaultValue={item.accrued} disabled />
                                 </td>
                                 <td>
-                                    <button className="btn btn-secondary btn-sm" onClick={this.handleDelete.bind(this, item)}>x</button>
+                                    <button className="btn btn-secondary btn-sm" onClick={this.handleDelete.bind(this, item)}>
+                                        <i className="icon-circle-with-cross" />
+                                    </button>
                                 </td>
                             </tr>    
                             <tr className="table-divider"></tr>

@@ -3,8 +3,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import Menu from './components/Menu';
 import Home from './pages/Home';
-import MoneyFlow from './pages/MoneyFlow';
-import EstimatedWorth from './pages/EstimatedWorth';
+import About from './pages/About';
 import Notfound from './pages/NotFound';
 
 import './css/App.css';
@@ -21,13 +20,9 @@ class App extends Component {
                 <Menu />
                 <Home />
               </Route>
-              <Route path="/moneyflow">
+              <Route path="/about">
                 <Menu />
-                <MoneyFlow />
-              </Route>
-              <Route path="/estimatedworth">
-                <Menu />
-                <EstimatedWorth />
+                <About />
               </Route>
               <Route>
                 <Notfound />

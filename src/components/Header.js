@@ -8,10 +8,22 @@ class Header extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            accrued_sum: 0,
+            monthly_income: 0,
+            monthly_expenses: 0
+        }
+
+        this.interval = null;
+
+        this.loadSampleData = this.loadSampleData.bind(this);
+    }
+
+    computeData() {
         let monthly_income = 0;
         let monthly_expenses = 0;
 
-        props.items.map(function(item) {    
+        this.props.items.map(function(item) {    
             if (item.type === CONFIG.ITEM_TYPE.ASSET) {
                 monthly_income += item.amount * item.apr / 100 / 12;
             } else if (item.type === CONFIG.ITEM_TYPE.SERVICE) {
@@ -23,17 +35,33 @@ class Header extends Component {
             return item;
         });
 
-        this.interval = null;
-        this.state = {
+        this.setState({
             accrued_sum: 0,
             monthly_income: monthly_income,
             monthly_expenses: monthly_expenses
-        }
+        })
     }
+  
+    loadSampleData() {
+      let all_items = [];
+  
+      all_items = all_items.concat(CONFIG.SAMPLE_DATA.ASSETS, CONFIG.SAMPLE_DATA.SERVICES, CONFIG.SAMPLE_DATA.EXPENSES);
+      
+      this.setState({
+        all_items: all_items,
+        assets: CONFIG.SAMPLE_DATA.ASSETS,
+        services: CONFIG.SAMPLE_DATA.SERVICES,
+        expenses: CONFIG.SAMPLE_DATA.EXPENSES
+      });
+
+      this.computeData();
+    }  
 
     componentDidMount() {
         const _this = this;
         let accrued_sum = 0;
+
+        this.computeData();
 
         this.interval = setInterval(function() {
           _this.props.items.map(function(item) {

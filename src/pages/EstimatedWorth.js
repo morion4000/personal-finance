@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import ReactTooltip from 'react-tooltip';
 
 import Alert from '../components/Alert';
-import Footer from '../components/Footer';
 import Storage from '../components/Storage';
 
 import CONFIG from '../config';
@@ -39,24 +37,20 @@ class EstimatedWorth extends Component {
   render() {
     return (
       <React.Fragment>
-        <ReactTooltip effect="solid" />
-
-        <br />
-
         <div className="container">
+          {/*
           <div className="row">
               <div className="col">
                   <center><button className="btn btn-sm btn-secondary" onClick={this.loadSampleData} data-tip="Temporarily load sample data. Refresh page to reset.">Load sample data</button></center>
               </div>
           </div>
+          */}
 
           <br />
 
           {!this.state.sample && <Alert items={this.state.all_items} />}
           {this.state.sample && <Alert items={this.state.all_items} />}
         </div>
-
-        <Footer />
       </React.Fragment>
     );
   }
