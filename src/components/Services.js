@@ -30,7 +30,7 @@ class Services extends Component {
         this.setState({
           [name]: value
         });
-      }
+    }
     
     handleSubmit(e) {
         e.preventDefault();

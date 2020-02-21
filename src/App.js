@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import Menu from './components/Menu';
 import Home from './pages/Home/index';
+import RentBuy from './pages/RentBuy';
 import About from './pages/About';
 import Notfound from './pages/NotFound';
 
@@ -19,6 +20,10 @@ class App extends Component {
               <Route exact path="/">
                 <Menu />
                 <Home />
+              </Route>
+              <Route path="/rent-or-buy">
+                <Menu />
+                <RentBuy />
               </Route>
               <Route path="/about">
                 <Menu />

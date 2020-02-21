@@ -3,6 +3,8 @@ import NumberFormat from 'react-number-format';
 import ReactTooltip from 'react-tooltip';
 
 import CONFIG from '../config';
+
+import Pie from './Pie';
 import Storage from './Storage';
 
 class Expenses extends Component {
@@ -130,9 +132,13 @@ class Expenses extends Component {
                     Yearly: <NumberFormat value={this.getMonthlyDebit() * 12} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
                 </ReactTooltip>
 
+                <ReactTooltip id="expenses_chart_tooltip" effect="solid">
+                    <Pie items={this.props.items} />
+                </ReactTooltip>
+
                 <div className="row">
                   <div className="col-sm">
-                    <h3><strong>Expenses</strong></h3>
+                    <h3><strong data-tip data-for="expenses_chart_tooltip">Expenses</strong></h3>
                     <span data-tip data-for="expenses_debit_tooltip">
                         Debit: <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
                     </span>
@@ -216,7 +222,7 @@ class Expenses extends Component {
                                 </td>
                             </tr>
                             <tr className="table-divider"></tr>
-                            </tbody>
+                        </tbody>
                     ))}
                 </table>
 

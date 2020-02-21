@@ -229,7 +229,7 @@ class Assets extends Component {
                                     <NumberFormat value={item.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
                                 </th>
                                 <td>
-                                    <label data-tip="">APR {item.apr}%</label>
+                                    <label>APR {item.apr}%</label>
                                     <input type="text" className="form-control" defaultValue={item.accrued} disabled />
                                 </td>
                                 <td>
