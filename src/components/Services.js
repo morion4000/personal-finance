@@ -202,8 +202,8 @@ class Services extends Component {
                 <table className="table table-hover align-items-center table-borderless">
                     <thead>
                         <tr>
-                            <th scope="col">Income</th>
-                            <th scope="col">Credit</th>
+                            <th scope="col"><strong>Income</strong></th>
+                            <th scope="col"><strong>Credit</strong></th>
                             <th scope="col">&nbsp;</th>
                         </tr>
                     </thead>

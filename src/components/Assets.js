@@ -225,8 +225,8 @@ class Assets extends Component {
                 <table className="table table-hover align-items-center table-borderless">
                     <thead>
                         <tr>
-                            <th scope="col">Asset</th>
-                            <th scope="col">Credit</th>
+                            <th scope="col"><strong>Asset</strong></th>
+                            <th scope="col"><strong>Credit</strong></th>
                             <th scope="col">&nbsp;</th>
                         </tr>
                     </thead>

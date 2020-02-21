@@ -203,8 +203,8 @@ class Expenses extends Component {
                 <table className="table table-hover align-items-center table-borderless">
                     <thead>
                         <tr>
-                            <th scope="col">Expense</th>
-                            <th scope="col">Debit</th>
+                            <th scope="col"><strong>Expense</strong></th>
+                            <th scope="col"><strong>Debit</strong></th>
                             <th scope="col">&nbsp;</th>
                         </tr>
                     </thead>
