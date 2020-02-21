@@ -9,7 +9,7 @@ class Menu extends Component {
                     <div className="container">
                         <nav className="navbar navbar-expand-lg">
                             <a className="navbar-brand" href="/">
-                                <i className="icon-area-graph" />
+                                <i className="icon-pie-chart" />
                             </a>
                             
                             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,6 +19,9 @@ class Menu extends Component {
                                 <ul className="navbar-nav">
                                     <li className="nav-item">
                                         <Link to="/" className="nav-link">Dashboard</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/rent-or-buy" className="nav-link">Rent or Buy</Link>
                                     </li>
                                     <li className="nav-item">
                                         <Link to="/about" className="nav-link">About</Link>

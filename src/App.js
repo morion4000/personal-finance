@@ -18,7 +18,6 @@ class App extends Component {
           <div>
             <Switch>
               <Route exact path="/">
-                <Menu />
                 <Home />
               </Route>
               <Route path="/rent-or-buy">
