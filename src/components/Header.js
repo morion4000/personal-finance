@@ -11,7 +11,8 @@ class Header extends Component {
         this.state = {
             accrued_sum: 0,
             monthly_income: 0,
-            monthly_expenses: 0
+            monthly_expenses: 0,
+            monthly_total: 0
         }
 
         this.interval = null;
@@ -38,7 +39,8 @@ class Header extends Component {
         this.setState({
             accrued_sum: 0,
             monthly_income: monthly_income,
-            monthly_expenses: monthly_expenses
+            monthly_expenses: monthly_expenses,
+            monthly_total: monthly_income - monthly_expenses
         })
     }
   
@@ -102,11 +104,18 @@ class Header extends Component {
                         <div className="col-5">
                             <h1 className="display-4">Personal Finance</h1>
                             <p className="lead">Visualise Money Streams</p>
-                            <button type="button" className={`btn btn-lg btn-block ${this.state.accrued_sum >= 0 ? 'btn-primary' : 'btn-danger'}`} data-tip="Real-time Earnings">
+                            <button type="button" className={`btn btn-lg btn-block ${this.state.accrued_sum >= 0 ? 'btn-primary' : 'btn-danger'}`} data-tip data-for="streaming_total">
                                 Streaming&nbsp;&nbsp;
                                 <h5 style={{'color': 'rgb(177, 190, 212)'}}>
                                     <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={6} />
                                 </h5>
+
+                                <ReactTooltip id="streaming_total" effect="solid">
+                                    Hourly: <NumberFormat value={this.state.monthly_total / 30 / 24} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} /><br />
+                                    Daily: <NumberFormat value={this.state.monthly_total / 30} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={1} /><br />
+                                    <strong>Monthly: <NumberFormat value={this.state.monthly_total} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} /></strong><br />
+                                    Yearly: <NumberFormat value={this.state.monthly_total * 12} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                                </ReactTooltip>
                             </button>
                             <br /><br />
                             <h5>
