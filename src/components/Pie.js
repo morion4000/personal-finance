@@ -30,7 +30,7 @@ class Pie extends Component {
             type: 'pie'
           },
           title: {
-            text: 'Expenses'
+            text: props.title
           },
           tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -46,7 +46,7 @@ class Pie extends Component {
             }
           },
           series: [{
-            name: 'Expense',
+            name: 'Item',
             colorByPoint: true,
             data: data
           }]

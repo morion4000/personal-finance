@@ -132,8 +132,8 @@ class Expenses extends Component {
                     Yearly: <NumberFormat value={this.getMonthlyDebit() * 12} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
                 </ReactTooltip>
 
-                <ReactTooltip id="expenses_chart_tooltip" effect="solid">
-                    <Pie items={this.props.items} />
+                <ReactTooltip id="expenses_chart_tooltip" effect="solid" place="left">
+                    <Pie items={this.props.items} title="Expenses" />
                 </ReactTooltip>
 
                 <div className="row">
@@ -151,7 +151,7 @@ class Expenses extends Component {
                   <div className="col">
                       <center>
                             <button
-                                className="btn btn-danger btn-lg"
+                                className="btn btn-danger"
                                 onClick={this.showAddForm}>
                                     <i className="icon-circle-with-plus" />
                                 </button>

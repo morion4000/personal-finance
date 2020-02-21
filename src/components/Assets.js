@@ -3,6 +3,7 @@ import NumberFormat from 'react-number-format';
 import ReactTooltip from 'react-tooltip';
 
 import CONFIG from '../config';
+import Pie from './Pie';
 import Storage from './Storage';
 
 class Assets extends Component {
@@ -139,9 +140,13 @@ class Assets extends Component {
                     Yearly: <NumberFormat value={this.getMonthlyCredit() * 12} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
                 </ReactTooltip>
 
+                <ReactTooltip id="assets_chart_tooltip" effect="solid" place="right">
+                    <Pie items={this.props.items} title="Assets" />
+                </ReactTooltip>
+
                 <div className="row">
                   <div className="col-sm">
-                    <h3><strong>Assets</strong> <span className="badge badge-secondary">{this.getTotalApr()}%</span></h3>
+                    <h3><strong data-tip data-for="assets_chart_tooltip">Assets</strong> <span className="badge badge-secondary">{this.getTotalApr()}%</span></h3>
                     <span data-tip data-for="assets_credit_tooltip">
                         Credit: <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
                     </span>
@@ -154,7 +159,7 @@ class Assets extends Component {
                   <div className="col">
                       <center>
                         <button
-                            className="btn btn-primary btn-lg"
+                            className="btn btn-primary"
                             onClick={this.showAddForm}>
                                 <i className="icon-circle-with-plus" />
                             </button>
