@@ -148,7 +148,8 @@ class Assets extends Component {
                   <div className="col-sm">
                     <h3>
                         <i className="icon-area-graph" />&nbsp;
-                        <strong data-tip data-for="assets_chart_tooltip">Assets</strong> <span className="badge badge-secondary">{this.getTotalApr()}%</span>
+                        <strong data-tip data-for="assets_chart_tooltip">Assets</strong>&nbsp;
+                        <span className="badge badge-secondary" data-tip="Average APR">{this.getTotalApr()}%</span>
                     </h3>
                     <span data-tip data-for="assets_credit_tooltip">
                         Credit: <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
