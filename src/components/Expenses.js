@@ -138,7 +138,10 @@ class Expenses extends Component {
 
                 <div className="row">
                   <div className="col-sm">
-                    <h3><strong data-tip data-for="expenses_chart_tooltip">Expenses</strong></h3>
+                    <h3>
+                        <i className="icon-shopping-cart" />&nbsp;
+                        <strong data-tip data-for="expenses_chart_tooltip">Expenses</strong>
+                    </h3>
                     <span data-tip data-for="expenses_debit_tooltip">
                         Debit: <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
                     </span>

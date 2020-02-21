@@ -132,12 +132,15 @@ class Services extends Component {
                 </ReactTooltip>
 
                 <ReactTooltip id="services_chart_tooltip" effect="solid">
-                    <Pie items={this.props.items} title="Services" />
+                    <Pie items={this.props.items} title="Income" />
                 </ReactTooltip>
 
                 <div className="row">
                   <div className="col-sm">
-                    <h3><strong data-tip data-for="services_chart_tooltip">Income</strong></h3>
+                    <h3>
+                        <i className="icon-suitcase" />&nbsp;
+                        <strong data-tip data-for="services_chart_tooltip">Income</strong>
+                    </h3>
                     <span data-tip data-for="services_credit_tooltip">
                         Credit: <NumberFormat value={this.state.accrued_sum} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={5} />
                     </span>
