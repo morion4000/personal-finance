@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NumberFormat from 'react-number-format';
+import ReactTooltip from 'react-tooltip';
 
 import CONFIG from '../config';
 
@@ -50,15 +51,16 @@ class Alert extends Component {
     render() {
         return (    
           <div className="alert alert-secondary" role="alert">
+            <ReactTooltip effect="solid" />
             <p>
               <strong>Net Worth:</strong>&nbsp;
-              <span data-tip={`@ ${CONFIG.SERVICE_ESTIMATE_APR}% APR`}>
+              <span data-tip="Total assets">
                 <NumberFormat value={this.state.estimated_worth} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
               </span>
             </p>
             <p>
               <strong>Runway:</strong>&nbsp;
-              <span data-tip={`Yearly Deficit: $${this.state.yearly_deficit}`}>
+              <span data-tip={`Yearly deficit: $${this.state.yearly_deficit.toFixed(0)}`}>
                 {this.state.yearly_deficit > 0 && <span><NumberFormat value={this.state.runway} displayType={'text'} thousandSeparator={true} decimalScale={1} /> Years</span>}
                 {this.state.yearly_deficit === 0 && <span>&infin;</span>}
               </span>
