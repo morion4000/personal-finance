@@ -19,6 +19,12 @@ class Assets extends Component {
             show_add_form: false
         }
 
+        this.props.items.map(function(item) {
+            item.monthly_income = item.amount * item.apr / 100 / 12;
+
+            return item;
+        });
+
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.showAddForm = this.showAddForm.bind(this);
@@ -28,11 +34,11 @@ class Assets extends Component {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-    
+
         this.setState({
-          [name]: value
+            [name]: value
         });
-      }
+    }
     
     handleSubmit(e) {
         e.preventDefault();
@@ -226,7 +232,7 @@ class Assets extends Component {
                     <thead>
                         <tr>
                             <th scope="col"><strong>Asset</strong></th>
-                            <th scope="col"><strong>Credit</strong></th>
+                            <th scope="col"><strong>Amount</strong></th>
                             <th scope="col">&nbsp;</th>
                         </tr>
                     </thead>
@@ -234,12 +240,19 @@ class Assets extends Component {
                         <tbody key={item.id} style={{borderTop: 'none'}}>        
                             <tr className="bg-white">
                                 <th>
-                                    <strong>{item.name}</strong><br />
-                                    <NumberFormat value={item.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                                    <strong>{item.name}</strong> ({item.apr}%)<br />
+                                    <NumberFormat value={item.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} /><br />
                                 </th>
                                 <td>
-                                    <label>APR {item.apr}%</label>
-                                    <input type="text" className="form-control" defaultValue={item.accrued} disabled />
+                                    <span data-tip data-for={`item_tooltip_${item.id}`}>
+                                        <NumberFormat value={item.monthly_income} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                                    </span>
+                                    <ReactTooltip id={`item_tooltip_${item.id}`} effect="solid">
+                                        Hourly: <NumberFormat value={item.monthly_income / 30 / 24} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} /><br />
+                                        Daily: <NumberFormat value={item.monthly_income / 30} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={1} /><br />
+                                        Monthly: <NumberFormat value={item.monthly_income} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} /><br />
+                                        Yearly: <NumberFormat value={item.monthly_income * 12} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                                    </ReactTooltip>
                                 </td>
                                 <td>
                                     <button className="btn btn-secondary btn-sm" onClick={this.handleDelete.bind(this, item)}>

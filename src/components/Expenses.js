@@ -204,7 +204,7 @@ class Expenses extends Component {
                     <thead>
                         <tr>
                             <th scope="col"><strong>Expense</strong></th>
-                            <th scope="col"><strong>Debit</strong></th>
+                            <th scope="col"><strong>Amount</strong></th>
                             <th scope="col">&nbsp;</th>
                         </tr>
                     </thead>
@@ -212,11 +212,18 @@ class Expenses extends Component {
                         <tbody key={item.id} style={{borderTop: 'none'}}>
                             <tr className="bg-white" key={item.id}>
                                 <th>
-                                    <strong>{item.name}</strong><br />
-                                    <NumberFormat value={item.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                                    <strong>{item.name}</strong>
                                 </th>
                                 <td>
-                                    <input type="text" className="form-control" defaultValue={item.accrued} disabled />
+                                    <span data-tip data-for={`item_tooltip_${item.id}`}>
+                                        <NumberFormat value={item.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                                    </span>
+                                    <ReactTooltip id={`item_tooltip_${item.id}`} effect="solid">
+                                        Hourly: <NumberFormat value={item.amount / 30 / 24} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} /><br />
+                                        Daily: <NumberFormat value={item.amount / 30} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={1} /><br />
+                                        Monthly: <NumberFormat value={item.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} /><br />
+                                        Yearly: <NumberFormat value={item.amount * 12} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                                    </ReactTooltip>
                                 </td>
                                 <td>
                                     <button className="btn btn-secondary btn-sm" onClick={this.handleDelete.bind(this, item)}>
