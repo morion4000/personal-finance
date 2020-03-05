@@ -48,19 +48,49 @@ class Home extends Component {
     });
   }
 
+  renderHeader() {
+    return (
+      <Header items={this.state.all_items} sampleHandler={this.loadSampleData}>
+        {this.state.all_items.length > 0 && <Donut items={this.state.all_items} />}
+      </Header>
+    );
+  }
+
+  renderIncomeExpenses() {
+    return (
+      <React.Fragment>
+        {!this.state.sample && <IncomeExpenses items={this.state.all_items} />}
+        {this.state.sample && <IncomeExpenses items={this.state.all_items} />}
+      </React.Fragment>
+    );
+  }
+
+  renderCashflow() {
+    return (
+      <React.Fragment>
+        {!this.state.sample && <CashFlow items={this.state.all_items} />}
+        {this.state.sample && <CashFlow items={this.state.all_items} />}
+      </React.Fragment>
+    );
+  }
+
+  renderNetWorth() {
+    return (
+      <React.Fragment>
+        {!this.state.sample && <NetWorth items={this.state.all_items} />}
+        {this.state.sample && <NetWorth items={this.state.all_items} />}
+      </React.Fragment>
+    );
+  }
+
   render() {
     return (
       <React.Fragment>
         <ReactTooltip effect="solid" />
 
-        {!this.state.sample && <Header items={this.state.all_items}>
-          {this.state.all_items.length > 0 && <Donut items={this.state.all_items} />}
-        </Header>}
-
-        {this.state.sample && <Header items={this.state.all_items}>
-          <Donut items={this.state.all_items} />
-        </Header>}
-
+        {!this.state.sample && this.renderHeader()}
+        {this.state.sample && this.renderHeader()}
+        
         <div className="bg-white" style={{marginTop: '-50px'}}>
             <div className="container">
                 <div className="row">
@@ -83,9 +113,9 @@ class Home extends Component {
 
         <br />
 
-        {this.state.active_tab === 'incomeexpenses' && <IncomeExpenses />}
-        {this.state.active_tab === 'cashflow' && <CashFlow />}
-        {this.state.active_tab === 'networth' && <NetWorth />}
+        {this.state.active_tab === 'incomeexpenses' && this.renderIncomeExpenses()}
+        {this.state.active_tab === 'cashflow' && this.renderCashflow()}
+        {this.state.active_tab === 'networth' && this.renderNetWorth()}
 
         <Footer />
       </React.Fragment>

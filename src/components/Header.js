@@ -16,8 +16,6 @@ class Header extends Component {
         }
 
         this.interval = null;
-
-        this.loadSampleData = this.loadSampleData.bind(this);
     }
 
     computeData() {
@@ -43,21 +41,6 @@ class Header extends Component {
             monthly_total: monthly_income - monthly_expenses
         })
     }
-  
-    loadSampleData() {
-      let all_items = [];
-  
-      all_items = all_items.concat(CONFIG.SAMPLE_DATA.ASSETS, CONFIG.SAMPLE_DATA.SERVICES, CONFIG.SAMPLE_DATA.EXPENSES);
-      
-      this.setState({
-        all_items: all_items,
-        assets: CONFIG.SAMPLE_DATA.ASSETS,
-        services: CONFIG.SAMPLE_DATA.SERVICES,
-        expenses: CONFIG.SAMPLE_DATA.EXPENSES
-      });
-
-      this.computeData();
-    }  
 
     componentDidMount() {
         const _this = this;
@@ -151,6 +134,11 @@ class Header extends Component {
                         </div>
                         <div className="col-sm">
                             {this.props.children}
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col">
+                            <center><button className="btn btn-sm btn-secondary" onClick={this.props.sampleHandler} data-tip="Temporarily load sample data. Refresh page to reset.">Load sample data</button></center>
                         </div>
                     </div>
                 </div>

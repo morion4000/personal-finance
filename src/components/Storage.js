@@ -1,8 +1,9 @@
 import CONFIG from '../config';
 
 class Storage {
-  static getItems(type = null) {
-      let items = localStorage.getItem(CONFIG.LOCALSTORAGE_KEY);
+  static getItems(type = null, overwrite_items = null) {
+      let items = overwrite_items !== null ? JSON.stringify(overwrite_items) 
+                  : localStorage.getItem(CONFIG.LOCALSTORAGE_KEY);
       let filtered_items = [];
 
       try {
