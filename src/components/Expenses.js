@@ -209,21 +209,19 @@ class Expenses extends Component {
                         </tr>
                     </thead>
                     {this.props.items.map(item => (
-                        <tbody key={item.id} style={{borderTop: 'none'}}>
+                        <tbody key={item.id} style={{borderTop: 'none'}} data-tip data-for={`item_tooltip_${item.id}`}>
+                            <ReactTooltip id={`item_tooltip_${item.id}`} effect="solid">
+                                Hourly: <NumberFormat value={item.amount / 30 / 24} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} /><br />
+                                Daily: <NumberFormat value={item.amount / 30} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={1} /><br />
+                                Monthly: <NumberFormat value={item.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} /><br />
+                                Yearly: <NumberFormat value={item.amount * 12} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
+                            </ReactTooltip>
                             <tr className="bg-white" key={item.id}>
                                 <th>
                                     <strong>{item.name}</strong>
                                 </th>
                                 <td>
-                                    <span data-tip data-for={`item_tooltip_${item.id}`}>
-                                        <NumberFormat value={item.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
-                                    </span>
-                                    <ReactTooltip id={`item_tooltip_${item.id}`} effect="solid">
-                                        Hourly: <NumberFormat value={item.amount / 30 / 24} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} /><br />
-                                        Daily: <NumberFormat value={item.amount / 30} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={1} /><br />
-                                        Monthly: <NumberFormat value={item.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} /><br />
-                                        Yearly: <NumberFormat value={item.amount * 12} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
-                                    </ReactTooltip>
+                                    <NumberFormat value={item.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} />
                                 </td>
                                 <td>
                                     <button className="btn btn-secondary btn-sm" onClick={this.handleDelete.bind(this, item)}>
