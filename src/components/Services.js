@@ -132,7 +132,7 @@ class Services extends Component {
                 </ReactTooltip>
 
                 <ReactTooltip id="services_chart_tooltip" effect="solid">
-                    <Pie items={this.props.items} title="Income" />
+                    <Pie items={this.props.items} title="Income" backgroundColor="white" />
                 </ReactTooltip>
 
                 <div className="row">

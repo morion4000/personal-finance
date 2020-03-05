@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 
-import Alert from '../../components/Alert';
+import Sankey from '../../components/Sankey';
 import Storage from '../../components/Storage';
-import Pie from '../../components/Pie';
 
 import CONFIG from '../../config';
 
-class NetWorth extends Component {
+class Retirement extends Component {
   constructor(props) {
     super(props);
 
@@ -22,17 +21,17 @@ class NetWorth extends Component {
     return (
       <React.Fragment>
         <div className="container">
-        <br />
+          <br />
 
-        <Alert items={this.state.all_items} />
-
-        <br />
-
-        <Pie items={this.state.assets} title="Assets" />
+          <div className="row">
+            <div className="col-sm">
+              {this.state.all_items.length > 0 && <Sankey items={this.state.all_items} />}
+            </div>
+          </div>
         </div>
       </React.Fragment>
     );
   }
 }
 
-export default NetWorth;
+export default Retirement;

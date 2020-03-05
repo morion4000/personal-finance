@@ -3,8 +3,6 @@ import Highcharts from 'highcharts'
 import highchartsExporting from 'highcharts/modules/exporting';
 import HighchartsReact from 'highcharts-react-official'
 
-import CONFIG from '../config';
-
 highchartsExporting(Highcharts);
 
 class Pie extends Component {
@@ -27,6 +25,7 @@ class Pie extends Component {
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false,
+            backgroundColor: props.backgroundColor || 'transparent',
             type: 'pie'
           },
           title: {

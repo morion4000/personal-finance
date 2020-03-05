@@ -4,6 +4,7 @@ import ReactTooltip from 'react-tooltip';
 import CashFlow from './CashFlow';
 import IncomeExpenses from './IncomeExpenses';
 import NetWorth from './NetWorth';
+import Retirement from './Retirement';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -83,6 +84,15 @@ class Home extends Component {
     );
   }
 
+  renderRetirement() {
+    return (
+      <React.Fragment>
+        {!this.state.sample && <Retirement items={this.state.all_items} />}
+        {this.state.sample && <Retirement items={this.state.all_items} />}
+      </React.Fragment>
+    );
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -105,6 +115,11 @@ class Home extends Component {
                             <li className="nav-item">
                                 <a className="nav-link" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'networth')}>Net Worth</a>
                             </li>
+                            {/*
+                            <li className="nav-item">
+                                <a className="nav-link" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'retirement')}>Retirement</a>
+                            </li>
+                            */}
                         </ul>
                     </div>
                 </div>
@@ -116,6 +131,7 @@ class Home extends Component {
         {this.state.active_tab === 'incomeexpenses' && this.renderIncomeExpenses()}
         {this.state.active_tab === 'cashflow' && this.renderCashflow()}
         {this.state.active_tab === 'networth' && this.renderNetWorth()}
+        {this.state.active_tab === 'retirement' && this.renderRetirement()}
 
         <Footer />
       </React.Fragment>

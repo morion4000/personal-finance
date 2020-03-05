@@ -133,7 +133,7 @@ class Expenses extends Component {
                 </ReactTooltip>
 
                 <ReactTooltip id="expenses_chart_tooltip" effect="solid" place="left">
-                    <Pie items={this.props.items} title="Expenses" />
+                    <Pie items={this.props.items} title="Expenses" backgroundColor="white" />
                 </ReactTooltip>
 
                 <div className="row">

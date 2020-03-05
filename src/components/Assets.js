@@ -147,7 +147,7 @@ class Assets extends Component {
                 </ReactTooltip>
 
                 <ReactTooltip id="assets_chart_tooltip" effect="solid" place="right">
-                    <Pie items={this.props.items} title="Assets" />
+                    <Pie items={this.props.items} title="Assets" backgroundColor="white" />
                 </ReactTooltip>
 
                 <div className="row">
