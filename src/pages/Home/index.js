@@ -115,11 +115,9 @@ class Home extends Component {
                             <li className="nav-item">
                                 <a className="nav-link" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'networth')}>Net Worth</a>
                             </li>
-                            {/*
                             <li className="nav-item">
                                 <a className="nav-link" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'retirement')}>Retirement</a>
                             </li>
-                            */}
                         </ul>
                     </div>
                 </div>
