@@ -170,7 +170,6 @@ class Retirement extends Component {
         <center>
           <p>Estimated annual return (APR):&nbsp;
             <input 
-                className=""
                 type="number"
                 placeholder="APR"
                 name="apr"
