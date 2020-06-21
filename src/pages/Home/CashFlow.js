@@ -12,9 +12,10 @@ class CashFlow extends Component {
     this.state = {
       all_items: Storage.getItems(null, props.items),
       assets: Storage.getItems(CONFIG.ITEM_TYPE.ASSET, props.items),
-      services: Storage.getItems(CONFIG.ITEM_TYPE.SERVICE, props.items),
-      expenses: Storage.getItems(CONFIG.ITEM_TYPE.EXPENSE, props.items)
-    }
+      liabilities: Storage.getItems(CONFIG.ITEM_TYPE.LIABILITY, props.items),
+      income: Storage.getItems(CONFIG.ITEM_TYPE.INCOME, props.items),
+      expenses: Storage.getItems(CONFIG.ITEM_TYPE.EXPENSE, props.items),
+    };
   }
 
   render() {
@@ -25,7 +26,9 @@ class CashFlow extends Component {
 
           <div className="row">
             <div className="col-sm">
-              {this.state.all_items.length > 0 && <Sankey items={this.state.all_items} />}
+              {this.state.all_items.length > 0 && (
+                <Sankey items={this.state.all_items} />
+              )}
             </div>
           </div>
         </div>

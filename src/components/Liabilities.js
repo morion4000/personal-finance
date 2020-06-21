@@ -6,7 +6,7 @@ import CONFIG from '../config';
 import Pie from './Pie';
 import Storage from './Storage';
 
-class Assets extends Component {
+class Liabilities extends Component {
   constructor(props) {
     super(props);
 
@@ -45,11 +45,10 @@ class Assets extends Component {
 
     Storage.addItem({
       id: Date.now(),
-      type: CONFIG.ITEM_TYPE.ASSET,
+      type: CONFIG.ITEM_TYPE.LIABILITY,
       name: this.state.name,
       amount: this.state.principal,
       apr: this.state.apr,
-      compounds: false,
     });
 
     this.setState({
@@ -111,12 +110,12 @@ class Assets extends Component {
     let total_apr = 0;
     let generating_assets_count = 0;
 
-    this.props.items.forEach(function (asset) {
-      if (asset.apr > 0) {
+    this.props.items.forEach(function (liability) {
+      if (liability.apr > 0) {
         generating_assets_count++;
       }
 
-      total_apr += asset.apr;
+      total_apr += liability.apr;
     });
 
     total_apr /= generating_assets_count;
@@ -126,13 +125,13 @@ class Assets extends Component {
   }
 
   getMonthlyCredit() {
-    let monthly_credit = 0;
+    let monthly_debit = 0;
 
-    this.props.items.forEach(function (asset) {
-      monthly_credit += (asset.amount * asset.apr) / 100 / 12;
+    this.props.items.forEach(function (liability) {
+      monthly_debit += (liability.amount * liability.apr) / 100 / 12;
     });
 
-    return monthly_credit;
+    return monthly_debit;
   }
 
   render() {
@@ -141,7 +140,7 @@ class Assets extends Component {
 
     return (
       <React.Fragment>
-        <ReactTooltip id="assets_credit_tooltip" effect="solid">
+        <ReactTooltip id="assets_debit_tooltip" effect="solid">
           Hourly:{' '}
           <NumberFormat
             value={this.getMonthlyCredit() / 30 / 24}
@@ -184,7 +183,7 @@ class Assets extends Component {
         <ReactTooltip id="assets_chart_tooltip" effect="solid" place="right">
           <Pie
             items={this.props.items}
-            title="Assets"
+            title="Liabilities"
             backgroundColor="white"
           />
         </ReactTooltip>
@@ -192,18 +191,18 @@ class Assets extends Component {
         <div className="row">
           <div className="col-sm">
             <h3>
-              <i className="icon-area-graph" />
+              <i className="icon-shop" />
               &nbsp;
               <strong data-tip data-for="assets_chart_tooltip">
-                Assets
+                Liabilities
               </strong>
               &nbsp;
               <span className="badge badge-secondary" data-tip="Average APR">
                 {this.getTotalApr()}%
               </span>
             </h3>
-            <span data-tip data-for="assets_credit_tooltip">
-              Credit:{' '}
+            <span data-tip data-for="assets_debit_tooltip">
+              Debit:{' '}
               <NumberFormat
                 value={this.state.accrued_sum}
                 displayType={'text'}
@@ -223,7 +222,7 @@ class Assets extends Component {
         >
           <div className="col">
             <center>
-              <button className="btn btn-primary" onClick={this.showAddForm}>
+              <button className="btn btn-danger" onClick={this.showAddForm}>
                 <i className="icon-circle-with-plus" />
               </button>
             </center>
@@ -246,7 +245,7 @@ class Assets extends Component {
                     value={this.state.name}
                     onChange={this.handleInputChange}
                   />
-                  <small>eg. Bank deposit</small>
+                  <small>eg. Mortgage</small>
                 </div>
                 <div className="col">
                   <input
@@ -276,11 +275,11 @@ class Assets extends Component {
               <div className="form-row form-group">
                 <div className="col">
                   <button
-                    className="btn btn-block btn-primary btn-lg"
+                    className="btn btn-block btn-danger btn-lg"
                     type="submit"
                     disabled={!valid}
                   >
-                    Add asset
+                    Add liability
                   </button>
                 </div>
               </div>
@@ -294,7 +293,7 @@ class Assets extends Component {
           <thead>
             <tr>
               <th scope="col">
-                <strong>Asset</strong>
+                <strong>Liability</strong>
               </th>
               <th scope="col">
                 <strong>Amount</strong>
@@ -382,10 +381,10 @@ class Assets extends Component {
           ))}
         </table>
 
-        {this.props.items.length === 0 && <center>No assets</center>}
+        {this.props.items.length === 0 && <center>No liabilities</center>}
       </React.Fragment>
     );
   }
 }
 
-export default Assets;
+export default Liabilities;

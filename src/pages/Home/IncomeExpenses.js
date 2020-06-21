@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Assets from '../../components/Assets';
-import Services from '../../components/Services';
+import Income from '../../components/Income';
 import Expenses from '../../components/Expenses';
 import Storage from '../../components/Storage';
 
@@ -14,9 +14,10 @@ class IncomeExpenses extends Component {
     this.state = {
       all_items: Storage.getItems(null, props.items),
       assets: Storage.getItems(CONFIG.ITEM_TYPE.ASSET, props.items),
-      services: Storage.getItems(CONFIG.ITEM_TYPE.SERVICE, props.items),
-      expenses: Storage.getItems(CONFIG.ITEM_TYPE.EXPENSE, props.items)
-    }
+      liabilities: Storage.getItems(CONFIG.ITEM_TYPE.LIABILITY, props.items),
+      income: Storage.getItems(CONFIG.ITEM_TYPE.INCOME, props.items),
+      expenses: Storage.getItems(CONFIG.ITEM_TYPE.EXPENSE, props.items),
+    };
   }
 
   render() {
@@ -27,11 +28,7 @@ class IncomeExpenses extends Component {
 
           <div className="row">
             <div className="col-sm">
-              <Assets items={this.state.assets} />
-            </div>
-
-            <div className="col-sm">
-              <Services items={this.state.services} />
+              <Income items={this.state.income} />
             </div>
 
             <div className="col-sm">

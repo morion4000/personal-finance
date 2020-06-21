@@ -3,6 +3,7 @@ import ReactTooltip from 'react-tooltip';
 
 import CashFlow from './CashFlow';
 import IncomeExpenses from './IncomeExpenses';
+import AssetsLiabilities from './AssetsLiabilities';
 import NetWorth from './NetWorth';
 import Retirement from './Retirement';
 
@@ -20,11 +21,12 @@ class Home extends Component {
     this.state = {
       all_items: Storage.getItems(),
       assets: Storage.getItems(CONFIG.ITEM_TYPE.ASSET),
-      services: Storage.getItems(CONFIG.ITEM_TYPE.SERVICE),
+      libilities: Storage.getItems(CONFIG.ITEM_TYPE.LIABILITIES),
+      income: Storage.getItems(CONFIG.ITEM_TYPE.INCOME),
       expenses: Storage.getItems(CONFIG.ITEM_TYPE.EXPENSE),
       sample: false,
-      active_tab: 'incomeexpenses'
-    }
+      active_tab: 'incomeexpenses',
+    };
 
     this.loadSampleData = this.loadSampleData.bind(this);
   }
@@ -32,27 +34,34 @@ class Home extends Component {
   loadSampleData() {
     let all_items = [];
 
-    all_items = all_items.concat(CONFIG.SAMPLE_DATA.ASSETS, CONFIG.SAMPLE_DATA.SERVICES, CONFIG.SAMPLE_DATA.EXPENSES);
-    
+    all_items = all_items.concat(
+      CONFIG.SAMPLE_DATA.ASSETS,
+      CONFIG.SAMPLE_DATA.INCOME,
+      CONFIG.SAMPLE_DATA.EXPENSES
+    );
+
     this.setState({
       sample: true,
       all_items: all_items,
       assets: CONFIG.SAMPLE_DATA.ASSETS,
-      services: CONFIG.SAMPLE_DATA.SERVICES,
-      expenses: CONFIG.SAMPLE_DATA.EXPENSES
+      libilities: CONFIG.SAMPLE_DATA.LIABILITIES,
+      income: CONFIG.SAMPLE_DATA.INCOME,
+      expenses: CONFIG.SAMPLE_DATA.EXPENSES,
     });
   }
 
   changeTab = (tab) => {
     this.setState({
-      active_tab: tab
+      active_tab: tab,
     });
-  }
+  };
 
   renderHeader() {
     return (
       <Header items={this.state.all_items} sampleHandler={this.loadSampleData}>
-        {this.state.all_items.length > 0 && <Donut items={this.state.all_items} />}
+        {this.state.all_items.length > 0 && (
+          <Donut items={this.state.all_items} />
+        )}
       </Header>
     );
   }
@@ -62,6 +71,19 @@ class Home extends Component {
       <React.Fragment>
         {!this.state.sample && <IncomeExpenses items={this.state.all_items} />}
         {this.state.sample && <IncomeExpenses items={this.state.all_items} />}
+      </React.Fragment>
+    );
+  }
+
+  renderAssetsLiabilities() {
+    return (
+      <React.Fragment>
+        {!this.state.sample && (
+          <AssetsLiabilities items={this.state.all_items} />
+        )}
+        {this.state.sample && (
+          <AssetsLiabilities items={this.state.all_items} />
+        )}
       </React.Fragment>
     );
   }
@@ -100,33 +122,74 @@ class Home extends Component {
 
         {!this.state.sample && this.renderHeader()}
         {this.state.sample && this.renderHeader()}
-        
-        <div className="bg-white" style={{marginTop: '-50px'}}>
-            <div className="container">
-                <div className="row">
-                    <div className="col">
-                        <ul className="nav nav-tabs" role="tablist">
-                            <li className="nav-item">
-                                <a className="nav-link active" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'incomeexpenses')}>Income &amp; Expenses</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'cashflow')}>Cash Flow</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'networth')}>Net Worth</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" data-toggle="tab" href="javascript:;" onClick={this.changeTab.bind(this, 'retirement')}>Retirement</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+
+        <div className="bg-white" style={{ marginTop: '-50px' }}>
+          <div className="container">
+            <div className="row">
+              <div className="col">
+                <ul className="nav nav-tabs" role="tablist">
+                  <li className="nav-item">
+                    <a
+                      className="nav-link active"
+                      data-toggle="tab"
+                      href="javascript:;"
+                      onClick={this.changeTab.bind(this, 'incomeexpenses')}
+                    >
+                      Income &amp; Expenses
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className="nav-link"
+                      data-toggle="tab"
+                      href="javascript:;"
+                      onClick={this.changeTab.bind(this, 'assetsliabilities')}
+                    >
+                      Assets &amp; Liabilities
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className="nav-link"
+                      data-toggle="tab"
+                      href="javascript:;"
+                      onClick={this.changeTab.bind(this, 'cashflow')}
+                    >
+                      Cash Flow
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className="nav-link"
+                      data-toggle="tab"
+                      href="javascript:;"
+                      onClick={this.changeTab.bind(this, 'networth')}
+                    >
+                      Net Worth
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className="nav-link"
+                      data-toggle="tab"
+                      href="javascript:;"
+                      onClick={this.changeTab.bind(this, 'retirement')}
+                    >
+                      Retirement
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
+          </div>
         </div>
 
         <br />
 
-        {this.state.active_tab === 'incomeexpenses' && this.renderIncomeExpenses()}
+        {this.state.active_tab === 'incomeexpenses' &&
+          this.renderIncomeExpenses()}
+        {this.state.active_tab === 'assetsliabilities' &&
+          this.renderAssetsLiabilities()}
         {this.state.active_tab === 'cashflow' && this.renderCashflow()}
         {this.state.active_tab === 'networth' && this.renderNetWorth()}
         {this.state.active_tab === 'retirement' && this.renderRetirement()}

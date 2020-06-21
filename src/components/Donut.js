@@ -25,7 +25,7 @@ class Donut extends Component {
               income_sum += monthly_income;
               break;
 
-            case CONFIG.ITEM_TYPE.SERVICE:
+            case CONFIG.ITEM_TYPE.INCOME:
                 income_sum += item.amount;
               break;
 

@@ -2,31 +2,48 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class Menu extends Component {
-    render() {
-        return (
-            <div className="nav-container">
-                <div className="bg-dark navbar-dark position-fixed" data-sticky="top">
-                    <div className="container">
-                        <nav className="navbar navbar-expand-lg">
-                            <a className="navbar-brand" href="/">
-                                <i className="icon-pie-chart" />
-                            </a>
-                            
-                            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                                <i className="icon-menu h4"></i>
-                            </button>
-                            <div className="collapse navbar-collapse justify-content-between" id="navbarNav">
-                                <ul className="navbar-nav">
-                                    <li className="nav-item">
-                                        <Link to="/" className="nav-link">Dashboard</Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/rent-or-buy" className="nav-link">Rent or Buy</Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/about" className="nav-link">About</Link>
-                                    </li>
-                                    {/*
+  render() {
+    return (
+      <div className="nav-container">
+        <div className="bg-dark navbar-dark position-fixed" data-sticky="top">
+          <div className="container">
+            <nav className="navbar navbar-expand-lg">
+              <a className="navbar-brand" href="/">
+                <i className="icon-pie-chart" />
+              </a>
+
+              <button
+                className="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <i className="icon-menu h4"></i>
+              </button>
+              <div
+                className="collapse navbar-collapse justify-content-between"
+                id="navbarNav"
+              >
+                <ul className="navbar-nav">
+                  <li className="nav-item">
+                    <Link to="/" className="nav-link">
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/rent-or-buy" className="nav-link">
+                      Rent or Buy
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/about" className="nav-link">
+                      About
+                    </Link>
+                  </li>
+                  {/*
                                     <li className="nav-item dropdown">
                                         <a className="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown">Pages</a>
                                         <div className="dropdown-menu" aria-labelledby="pagesDropdown">
@@ -58,9 +75,9 @@ class Menu extends Component {
                                         </div>
                                     </li>
                                     */}
-                                </ul>
+                </ul>
 
-                                {/*
+                {/*
                                 <ul className="navbar-nav">
                                     <li className="nav-item dropdown">
                                         <a className="nav-link dropdown-toggle dropdown-toggle-no-arrow p-lg-0" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -78,13 +95,13 @@ class Menu extends Component {
                                     </li>
                                 </ul>
                                 */}
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        );
-    }
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Menu;

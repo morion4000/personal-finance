@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Highcharts from 'highcharts'
+import Highcharts from 'highcharts';
 import highchartsSankey from 'highcharts/modules/sankey';
 import highchartsExporting from 'highcharts/modules/exporting';
-import HighchartsReact from 'highcharts-react-official'
+import HighchartsReact from 'highcharts-react-official';
 
 import CONFIG from '../config';
 
@@ -10,94 +10,107 @@ highchartsSankey(Highcharts);
 highchartsExporting(Highcharts);
 
 class Sankey extends Component {
-    constructor(props) {
-      super(props);
+  constructor(props) {
+    super(props);
 
-      let data = [];
-      
-      if (props.items) {
-        let assets_sum = 0;
-        let services_sum = 0;
-        let expenses_sum = 0;
-        let income_sum = 0;
+    let data = [];
 
-        props.items.map(function(item) {
-          switch (item.type) {
-            case CONFIG.ITEM_TYPE.ASSET:
-              const monthly_income = item.amount * item.apr / 100 / 12;
+    if (props.items) {
+      let assets_sum = 0;
+      let liabilities_sum = 0;
+      let income_sum = 0;
+      let expenses_sum = 0;
 
-              assets_sum += parseInt(monthly_income);
+      props.items.map(function (item) {
+        switch (item.type) {
+          case CONFIG.ITEM_TYPE.ASSET:
+            const monthly_income = (item.amount * item.apr) / 100 / 12;
 
-              if (monthly_income > 0) {
-                data.push([item.name, 'Savings', parseInt(monthly_income)]);
-              }
-              break;
+            assets_sum += parseInt(monthly_income);
 
-            case CONFIG.ITEM_TYPE.SERVICE:
-              services_sum += item.amount;
+            if (monthly_income > 0) {
+              data.push([item.name, 'Savings', parseInt(monthly_income)]);
+            }
+            break;
 
-              if (item.amount > 0) {
-                data.push([item.name, 'Services', item.amount]);
-              }
-              break;
+          case CONFIG.ITEM_TYPE.LIABILITY:
+            const monthly_expense = (item.amount * item.apr) / 100 / 12;
 
-            case CONFIG.ITEM_TYPE.EXPENSE:
-              expenses_sum += item.amount;
+            liabilities_sum += parseInt(monthly_expense);
 
-              if (item.amount > 0) {
-                data.push(['Expenses', item.name, item.amount]);
-              }
-              break;
+            if (monthly_expense > 0) {
+              data.push([item.name, 'Loans', parseInt(monthly_expense)]);
+            }
+            break;
 
-            default:
-          }
+          case CONFIG.ITEM_TYPE.INCOME:
+            income_sum += item.amount;
 
-          return item;
-        });
+            if (item.amount > 0) {
+              data.push([item.name, 'Income', item.amount]);
+            }
+            break;
 
-        income_sum = assets_sum + services_sum;
+          case CONFIG.ITEM_TYPE.EXPENSE:
+            expenses_sum += item.amount;
 
-        data.push(['Savings', 'Income', assets_sum]);
-        data.push(['Services', 'Income', services_sum]);
+            if (item.amount > 0) {
+              data.push(['Expenses', item.name, item.amount]);
+            }
+            break;
 
-        if (income_sum < expenses_sum) {
-          data.push(['Income', 'Expenses', income_sum]);
-          data.push(['Deficit', 'Expenses', expenses_sum - income_sum]);
+          default:
         }
-      
-        if (income_sum >= expenses_sum) {
-          data.push(['Income', 'Expenses', income_sum - (income_sum - expenses_sum)]);
-          data.push(['Income', 'Surplus', income_sum - expenses_sum]);
-        }
+
+        return item;
+      });
+
+      income_sum += assets_sum;
+      expenses_sum += liabilities_sum;
+
+      data.push(['Savings', 'Income', assets_sum]);
+      data.push(['Loans', 'Expenses', liabilities_sum]);
+
+      if (income_sum < expenses_sum) {
+        data.push(['Income', 'Expenses', income_sum]);
+        data.push(['Deficit', 'Expenses', expenses_sum - income_sum]);
       }
 
-      this.state = {
-        options: {
-          chart: {
-            backgroundColor: 'transparent'
-          },
-          title: {
-            text: 'Sankey Diagram'
-          },
-          series: [{
+      if (income_sum >= expenses_sum) {
+        data.push([
+          'Income',
+          'Expenses',
+          income_sum - (income_sum - expenses_sum),
+        ]);
+        data.push(['Income', 'Surplus', income_sum - expenses_sum]);
+      }
+    }
+
+    this.state = {
+      options: {
+        chart: {
+          backgroundColor: 'transparent',
+        },
+        title: {
+          text: 'Sankey Diagram',
+        },
+        series: [
+          {
             keys: ['from', 'to', 'weight'],
             data: data,
             type: 'sankey',
-            name: 'Flow'
-          }]
-        }
-      }
-    }
+            name: 'Flow',
+          },
+        ],
+      },
+    };
+  }
 
-    render() {
-        return (    
-            <HighchartsReact
-                highcharts={Highcharts}
-                options={this.state.options}
-            />
-        );
-    }
+  render() {
+    return (
+      <HighchartsReact highcharts={Highcharts} options={this.state.options} />
+    );
+  }
 }
-  
 
 export default Sankey;

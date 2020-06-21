@@ -1,86 +1,82 @@
 import React, { Component } from 'react';
-import Highcharts from 'highcharts'
+import Highcharts from 'highcharts';
 import highchartsExporting from 'highcharts/modules/exporting';
-import HighchartsReact from 'highcharts-react-official'
+import HighchartsReact from 'highcharts-react-official';
 
 highchartsExporting(Highcharts);
 
 class Chart extends Component {
-    constructor(props) {
-      super(props);
+  constructor(props) {
+    super(props);
 
-      let data = props.data;
+    let data = props.data;
 
-      this.state = {
-        options: {
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                backgroundColor: props.backgroundColor || 'transparent',
-                type: 'area'
+    this.state = {
+      options: {
+        chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          backgroundColor: props.backgroundColor || 'transparent',
+          type: 'area',
+        },
+        title: {
+          text: props.title,
+        },
+        tooltip: {
+          pointFormat: '{series.name} <b>${point.y:,.0f}</b>',
+        },
+        xAxis: {
+          title: {
+            text: 'Year',
+          },
+          allowDecimals: false,
+          labels: {
+            formatter: function () {
+              return this.value; // clean, unformatted number for year
             },
-            title: {
-                text: props.title
-            },
-            tooltip: {
-                pointFormat: '{series.name} <b>${point.y:,.0f}</b>'
-            },
-            xAxis: {
-                title: {
-                    text: 'Year'
+          },
+        },
+        yAxis: {
+          title: {
+            text: 'USD',
+          },
+        },
+        plotOptions: {
+          area: {
+            pointStart: 2020,
+            marker: {
+              enabled: false,
+              symbol: 'circle',
+              radius: 2,
+              states: {
+                hover: {
+                  enabled: true,
                 },
-                allowDecimals: false,
-                labels: {
-                    formatter: function () {
-                        return this.value; // clean, unformatted number for year
-                    }
-                }
+              },
             },
-            yAxis: {
-                title: {
-                    text: 'USD'
-                }
-            },
-            plotOptions: {
-                area: {
-                    pointStart: 2020,
-                    marker: {
-                        enabled: false,
-                        symbol: 'circle',
-                        radius: 2,
-                        states: {
-                            hover: {
-                                enabled: true
-                            }
-                        }
-                    }
-                }
-            },
-            series: data
-        }
-      }
-    }
+          },
+        },
+        series: data,
+      },
+    };
+  }
 
-    componentWillReceiveProps(props) {
-        if (props.refresh !== this.props.refresh) {
-            this.setState({
-                options: {
-                    series: props.data
-                }
-            });
-        }
+  componentWillReceiveProps(props) {
+    if (props.refresh !== this.props.refresh) {
+      this.setState({
+        options: {
+          series: props.data,
+        },
+      });
     }
+  }
 
-    render() {
-        return (    
-            <HighchartsReact
-                highcharts={Highcharts}
-                options={this.state.options}
-            />
-        );
-    }
+  render() {
+    return (
+      <HighchartsReact highcharts={Highcharts} options={this.state.options} />
+    );
+  }
 }
-  
 
 export default Chart;

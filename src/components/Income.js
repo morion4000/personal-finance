@@ -6,7 +6,7 @@ import CONFIG from '../config';
 import Pie from './Pie';
 import Storage from './Storage';
 
-class Assets extends Component {
+class Income extends Component {
   constructor(props) {
     super(props);
 
@@ -14,16 +14,9 @@ class Assets extends Component {
     this.state = {
       accrued_sum: 0,
       name: '',
-      principal: '',
-      apr: '',
+      income: '',
       show_add_form: false,
     };
-
-    this.props.items.map(function (item) {
-      item.monthly_income = (item.amount * item.apr) / 100 / 12;
-
-      return item;
-    });
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -45,17 +38,16 @@ class Assets extends Component {
 
     Storage.addItem({
       id: Date.now(),
-      type: CONFIG.ITEM_TYPE.ASSET,
+      type: CONFIG.ITEM_TYPE.INCOME,
       name: this.state.name,
-      amount: this.state.principal,
-      apr: this.state.apr,
+      amount: this.state.income,
+      apr: 0,
       compounds: false,
     });
 
     this.setState({
       name: '',
-      principal: '',
-      apr: '',
+      income: '',
     });
 
     window.location.reload();
@@ -83,7 +75,7 @@ class Assets extends Component {
         let accrued = item.accrued || 0;
 
         accrued +=
-          ((item.amount * item.apr) / 100 / CONFIG.MILISECONDS_IN_YEAR) *
+          ((item.amount * 12) / CONFIG.MILISECONDS_IN_YEAR) *
           CONFIG.REFRESH_INTERVAL;
 
         item.accrued = accrued;
@@ -107,41 +99,35 @@ class Assets extends Component {
     }
   }
 
-  getTotalApr() {
-    let total_apr = 0;
-    let generating_assets_count = 0;
+  getTotalEstimatedPrincipal() {
+    let total_principal = 0;
 
     this.props.items.forEach(function (asset) {
-      if (asset.apr > 0) {
-        generating_assets_count++;
-      }
-
-      total_apr += asset.apr;
+      const estimated_principal =
+        ((asset.amount * 12) / CONFIG.INCOME_ESTIMATE_APR) * 100;
+      total_principal += estimated_principal;
     });
 
-    total_apr /= generating_assets_count;
-    total_apr = total_apr || 0;
-
-    return total_apr.toFixed(1);
+    return total_principal + this.state.accrued_sum;
   }
 
   getMonthlyCredit() {
     let monthly_credit = 0;
 
     this.props.items.forEach(function (asset) {
-      monthly_credit += (asset.amount * asset.apr) / 100 / 12;
+      monthly_credit += asset.amount;
     });
 
     return monthly_credit;
   }
 
   render() {
-    const { name, principal, apr } = this.state;
-    const valid = name.length > 0 && principal.length > 0 && apr.length > 0;
+    const { name, income } = this.state;
+    const valid = name.length > 0 && income.length > 0;
 
     return (
       <React.Fragment>
-        <ReactTooltip id="assets_credit_tooltip" effect="solid">
+        <ReactTooltip id="income_credit_tooltip" effect="solid">
           Hourly:{' '}
           <NumberFormat
             value={this.getMonthlyCredit() / 30 / 24}
@@ -181,10 +167,10 @@ class Assets extends Component {
           />
         </ReactTooltip>
 
-        <ReactTooltip id="assets_chart_tooltip" effect="solid" place="right">
+        <ReactTooltip id="income_chart_tooltip" effect="solid">
           <Pie
             items={this.props.items}
-            title="Assets"
+            title="Income"
             backgroundColor="white"
           />
         </ReactTooltip>
@@ -192,17 +178,13 @@ class Assets extends Component {
         <div className="row">
           <div className="col-sm">
             <h3>
-              <i className="icon-area-graph" />
+              <i className="icon-suitcase" />
               &nbsp;
-              <strong data-tip data-for="assets_chart_tooltip">
-                Assets
+              <strong data-tip data-for="income_chart_tooltip">
+                Income
               </strong>
-              &nbsp;
-              <span className="badge badge-secondary" data-tip="Average APR">
-                {this.getTotalApr()}%
-              </span>
             </h3>
-            <span data-tip data-for="assets_credit_tooltip">
+            <span data-tip data-for="income_credit_tooltip">
               Credit:{' '}
               <NumberFormat
                 value={this.state.accrued_sum}
@@ -237,7 +219,7 @@ class Assets extends Component {
           <div className="col-sm">
             <form onSubmit={this.handleSubmit}>
               <div className="form-row form-group">
-                <div className="col-5">
+                <div className="col-6">
                   <input
                     className="form-control form-control-lg"
                     type="text"
@@ -246,41 +228,27 @@ class Assets extends Component {
                     value={this.state.name}
                     onChange={this.handleInputChange}
                   />
-                  <small>eg. Bank deposit</small>
+                  <small>eg. Job</small>
                 </div>
-                <div className="col">
+                <div className="col-6">
                   <input
                     className="form-control form-control-lg"
                     type="number"
-                    placeholder="Principal"
-                    name="principal"
-                    value={this.state.principal}
+                    placeholder="Monthly Income"
+                    name="income"
+                    value={this.state.income}
                     onChange={this.handleInputChange}
                   />
                   <small>eg. $1000</small>
-                </div>
-                <div className="col-3">
-                  <input
-                    className="form-control form-control-lg"
-                    type="number"
-                    min="0"
-                    max="100"
-                    placeholder="APR"
-                    name="apr"
-                    value={this.state.apr}
-                    onChange={this.handleInputChange}
-                  />
-                  <small>eg. 4%</small>
                 </div>
               </div>
               <div className="form-row form-group">
                 <div className="col">
                   <button
                     className="btn btn-block btn-primary btn-lg"
-                    type="submit"
                     disabled={!valid}
                   >
-                    Add asset
+                    Add income
                   </button>
                 </div>
               </div>
@@ -294,7 +262,7 @@ class Assets extends Component {
           <thead>
             <tr>
               <th scope="col">
-                <strong>Asset</strong>
+                <strong>Income</strong>
               </th>
               <th scope="col">
                 <strong>Amount</strong>
@@ -312,7 +280,7 @@ class Assets extends Component {
               <ReactTooltip id={`item_tooltip_${item.id}`} effect="solid">
                 Hourly:{' '}
                 <NumberFormat
-                  value={item.monthly_income / 30 / 24}
+                  value={item.amount / 30 / 24}
                   displayType={'text'}
                   thousandSeparator={true}
                   prefix={'$'}
@@ -321,7 +289,7 @@ class Assets extends Component {
                 <br />
                 Daily:{' '}
                 <NumberFormat
-                  value={item.monthly_income / 30}
+                  value={item.amount / 30}
                   displayType={'text'}
                   thousandSeparator={true}
                   prefix={'$'}
@@ -330,7 +298,7 @@ class Assets extends Component {
                 <br />
                 Monthly:{' '}
                 <NumberFormat
-                  value={item.monthly_income}
+                  value={item.amount}
                   displayType={'text'}
                   thousandSeparator={true}
                   prefix={'$'}
@@ -339,29 +307,20 @@ class Assets extends Component {
                 <br />
                 Yearly:{' '}
                 <NumberFormat
-                  value={item.monthly_income * 12}
+                  value={item.amount * 12}
                   displayType={'text'}
                   thousandSeparator={true}
                   prefix={'$'}
                   decimalScale={0}
                 />
               </ReactTooltip>
-              <tr className="bg-white">
+              <tr className="bg-white" key={item.id}>
                 <th>
-                  <strong>{item.name}</strong> ({item.apr}%)
-                  <br />
-                  <NumberFormat
-                    value={item.amount}
-                    displayType={'text'}
-                    thousandSeparator={true}
-                    prefix={'$'}
-                    decimalScale={0}
-                  />
-                  <br />
+                  <strong>{item.name}</strong>
                 </th>
                 <td>
                   <NumberFormat
-                    value={item.monthly_income}
+                    value={item.amount}
                     displayType={'text'}
                     thousandSeparator={true}
                     prefix={'$'}
@@ -382,10 +341,10 @@ class Assets extends Component {
           ))}
         </table>
 
-        {this.props.items.length === 0 && <center>No assets</center>}
+        {this.props.items.length === 0 && <center>No income</center>}
       </React.Fragment>
     );
   }
 }
 
-export default Assets;
+export default Income;

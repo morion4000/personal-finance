@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-import Alert from '../../components/Alert';
+import Assets from '../../components/Assets';
+import Liabilities from '../../components/Liabilities';
 import Storage from '../../components/Storage';
-import Pie from '../../components/Pie';
 
 import CONFIG from '../../config';
 
-class NetWorth extends Component {
+class IncomeExpenses extends Component {
   constructor(props) {
     super(props);
 
@@ -14,8 +14,6 @@ class NetWorth extends Component {
       all_items: Storage.getItems(null, props.items),
       assets: Storage.getItems(CONFIG.ITEM_TYPE.ASSET, props.items),
       liabilities: Storage.getItems(CONFIG.ITEM_TYPE.LIABILITY, props.items),
-      income: Storage.getItems(CONFIG.ITEM_TYPE.INCOME, props.items),
-      expenses: Storage.getItems(CONFIG.ITEM_TYPE.EXPENSE, props.items),
     };
   }
 
@@ -25,19 +23,13 @@ class NetWorth extends Component {
         <div className="container">
           <br />
 
-          <Alert items={this.state.all_items} />
-
-          <br />
-
           <div className="row">
             <div className="col-sm">
-              <Pie items={this.state.assets} title="Assets" />
+              <Assets items={this.state.assets} />
             </div>
 
-            <div className="col-sm"></div>
-
             <div className="col-sm">
-              <Pie items={this.state.liabilities} title="Liabilities" />
+              <Liabilities items={this.state.liabilities} />
             </div>
           </div>
         </div>
@@ -46,4 +38,4 @@ class NetWorth extends Component {
   }
 }
 
-export default NetWorth;
+export default IncomeExpenses;
