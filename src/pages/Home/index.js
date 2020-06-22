@@ -36,6 +36,7 @@ class Home extends Component {
 
     all_items = all_items.concat(
       CONFIG.SAMPLE_DATA.ASSETS,
+      CONFIG.SAMPLE_DATA.LIABILITIES,
       CONFIG.SAMPLE_DATA.INCOME,
       CONFIG.SAMPLE_DATA.EXPENSES
     );

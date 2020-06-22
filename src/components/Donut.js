@@ -25,6 +25,12 @@ class Donut extends Component {
             income_sum += monthly_income;
             break;
 
+          case CONFIG.ITEM_TYPE.LIABILITY:
+            const monthly_expense = (item.amount * item.apr) / 100 / 12;
+
+            expenses_sum += monthly_expense;
+            break;
+
           case CONFIG.ITEM_TYPE.INCOME:
             income_sum += item.amount;
             break;

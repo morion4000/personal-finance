@@ -25,6 +25,8 @@ class Header extends Component {
     this.props.items.map(function (item) {
       if (item.type === CONFIG.ITEM_TYPE.ASSET) {
         monthly_income += (item.amount * item.apr) / 100 / 12;
+      } else if (item.type === CONFIG.ITEM_TYPE.LIABILITY) {
+        monthly_expenses += (item.amount * item.apr) / 100 / 12;
       } else if (item.type === CONFIG.ITEM_TYPE.INCOME) {
         monthly_income += item.amount;
       } else if (item.type === CONFIG.ITEM_TYPE.EXPENSE) {
@@ -54,6 +56,10 @@ class Header extends Component {
 
         if (item.type === CONFIG.ITEM_TYPE.ASSET) {
           accrued +=
+            ((item.amount * item.apr) / 100 / CONFIG.MILISECONDS_IN_YEAR) *
+            CONFIG.REFRESH_INTERVAL;
+        } else if (item.type === CONFIG.ITEM_TYPE.LIABILITY) {
+          accrued -=
             ((item.amount * item.apr) / 100 / CONFIG.MILISECONDS_IN_YEAR) *
             CONFIG.REFRESH_INTERVAL;
         } else if (item.type === CONFIG.ITEM_TYPE.INCOME) {
