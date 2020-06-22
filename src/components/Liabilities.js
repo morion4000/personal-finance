@@ -108,17 +108,17 @@ class Liabilities extends Component {
 
   getTotalApr() {
     let total_apr = 0;
-    let generating_assets_count = 0;
+    let generating_liabilities_count = 0;
 
     this.props.items.forEach(function (liability) {
       if (liability.apr > 0) {
-        generating_assets_count++;
+        generating_liabilities_count++;
       }
 
       total_apr += liability.apr;
     });
 
-    total_apr /= generating_assets_count;
+    total_apr /= generating_liabilities_count;
     total_apr = total_apr || 0;
 
     return total_apr.toFixed(1);
@@ -140,7 +140,7 @@ class Liabilities extends Component {
 
     return (
       <React.Fragment>
-        <ReactTooltip id="assets_debit_tooltip" effect="solid">
+        <ReactTooltip id="liabilities_debit_tooltip" effect="solid">
           Hourly:{' '}
           <NumberFormat
             value={this.getMonthlyCredit() / 30 / 24}
@@ -180,7 +180,7 @@ class Liabilities extends Component {
           />
         </ReactTooltip>
 
-        <ReactTooltip id="assets_chart_tooltip" effect="solid" place="right">
+        <ReactTooltip id="liabilities_chart_tooltip" effect="solid" place="right">
           <Pie
             items={this.props.items}
             title="Liabilities"
@@ -193,7 +193,7 @@ class Liabilities extends Component {
             <h3>
               <i className="icon-shop" />
               &nbsp;
-              <strong data-tip data-for="assets_chart_tooltip">
+              <strong data-tip data-for="liabilities_chart_tooltip">
                 Liabilities
               </strong>
               &nbsp;
@@ -201,7 +201,7 @@ class Liabilities extends Component {
                 {this.getTotalApr()}%
               </span>
             </h3>
-            <span data-tip data-for="assets_debit_tooltip">
+            <span data-tip data-for="liabilities_debit_tooltip">
               Debit:{' '}
               <NumberFormat
                 value={this.state.accrued_sum}

@@ -82,6 +82,7 @@ class Alert extends Component {
             />
           </span>
         </p>
+        {/*
         <p>
           <strong>Runway:</strong>&nbsp;
           <span
@@ -103,6 +104,7 @@ class Alert extends Component {
             {this.state.yearly_deficit === 0 && <span>&infin;</span>}
           </span>
         </p>
+        */}
       </div>
     );
   }

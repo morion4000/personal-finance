@@ -29,7 +29,7 @@ class Sankey extends Component {
             assets_sum += parseInt(monthly_income);
 
             if (monthly_income > 0) {
-              data.push([item.name, 'Savings', parseInt(monthly_income)]);
+              data.push([item.name, 'Income', parseInt(monthly_income)]);
             }
             break;
 
@@ -39,7 +39,7 @@ class Sankey extends Component {
             liabilities_sum += parseInt(monthly_expense);
 
             if (monthly_expense > 0) {
-              data.push([item.name, 'Loans', parseInt(monthly_expense)]);
+              data.push(['Expenses', item.name, parseInt(monthly_expense)]);
             }
             break;
 
@@ -67,9 +67,6 @@ class Sankey extends Component {
 
       income_sum += assets_sum;
       expenses_sum += liabilities_sum;
-
-      data.push(['Savings', 'Income', assets_sum]);
-      data.push(['Loans', 'Expenses', liabilities_sum]);
 
       if (income_sum < expenses_sum) {
         data.push(['Income', 'Expenses', income_sum]);
