@@ -97,8 +97,8 @@ class Header extends Component {
             <ReactTooltip effect="solid" />
 
             <div className="col-5">
-              <h1 className="display-4">Personal Finance</h1>
-              <p className="lead">Visualise Money Streams</p>
+              <h1 className="display-4">Visualise Money Streams</h1>
+              <p className="lead">Dashboard that keeps track of income vs expenses and shows diagrams and charts to help you get a grasp on your financial situation.</p>
               <button
                 type="button"
                 className={`btn btn-lg btn-block ${
